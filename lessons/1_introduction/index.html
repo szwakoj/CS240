@@ -994,8 +994,8 @@
 </ul>
 </li>
 <li><strong>Formal Definition</strong><ul>
-<li>Input: An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span></li>
-<li>Output: A permutation (reordering) <span class="arithmatex">\([ a^{\prime}_1 , a^{\prime}_2, ..., a^{\prime}_n ]\)</span> of the input sequence such that <span class="arithmatex">\(a^{\prime}_1 \leq a^{\prime}_2 \leq ... \leq a^{\prime}_n\)</span></li>
+<li>Input: An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>, where <span class="arithmatex">\(n &gt; 0\)</span></li>
+<li>Output: A permutation (reordering) <span class="arithmatex">\([ a^{\prime}_0 , a^{\prime}_1, ..., a^{\prime}_{n-1} ]\)</span> of the input sequence such that <span class="arithmatex">\(a^{\prime}_0 \leq a^{\prime}_1 \leq ... \leq a^{\prime}_{n-1}\)</span></li>
 </ul>
 </li>
 </ul>
@@ -1011,7 +1011,7 @@
 Algorithms are solutions to computational problems. They take in a possible instance of the problem and are expected to produce a valid output. The process of each algorithm is different but boils down into taking in an input, transforming it, and producing an expected output. The transformation is done using a discrete number of ordered computational steps.</p>
 <p>In previous courses, you may have been introduced to algorithms as a set of steps that accomplish a certain task. Or you may have used algorithms as backbones for the logic of your code, using them as a means of aiding in the problem solving process. Whether you realized it or not, algorithms are what define programs. All programs are implementations of some algorithm. For example, take a look a the following algorithm for finding the max in a collection of numbers:
 - Algorithm: Max Element
-    - Inputs: An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>
+    - Inputs: An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>, where <span class="arithmatex">\(n &gt; 0\)</span>
     - Output: <span class="arithmatex">\(a_m\)</span> the maximum number in the sequence
     - Procedure:
         1. <span class="arithmatex">\(max \gets A[0]\)</span>
@@ -1053,7 +1053,7 @@ int max_element(int n, int A[n])
     - Linear Search: Find the index of a certain value in an array, return -1 if it does not exist
 - <strong>Formal Definition</strong>
     - Input: 
-        - An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>
+        - An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>, where <span class="arithmatex">\(n &gt; 0\)</span>
         - Target number <span class="arithmatex">\(t\)</span>
     - Output:  The smallest index <span class="arithmatex">\(\text{i where } A[i]=t, or −1\)</span> if no such index exists</p>
 <p>How would we assess two different algorithms that reportedly solve it?</p>
@@ -1062,7 +1062,7 @@ int max_element(int n, int A[n])
 <p>Let's compare the correctness of two algorithms:
 - Algorithm: 404 Not Found
     - Input: 
-        - An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>
+        - An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>, where <span class="arithmatex">\(n &gt; 0\)</span>
         - Target number <span class="arithmatex">\(t\)</span>
     - Output: -1
     - Procedure:
@@ -1070,7 +1070,7 @@ int max_element(int n, int A[n])
 <ul>
 <li>Algorithm: Linear Search<ul>
 <li>Input: <ul>
-<li>An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span></li>
+<li>An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>, where <span class="arithmatex">\(n &gt; 0\)</span></li>
 <li>Target number <span class="arithmatex">\(t\)</span></li>
 </ul>
 </li>
