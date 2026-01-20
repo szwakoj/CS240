@@ -1,9 +1,3 @@
 # C Review
 
-## Foo
-
-### Bar
-
-## Hee
-
-## HOO
+(Will be Posted 1/29/25)
