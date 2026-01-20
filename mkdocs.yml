@@ -27,7 +27,7 @@ theme:
 markdown_extensions:
   - tables
   - pymdownx.arithmatex:
-    generic: true
+      generic: true
 
 extra_javascript:
   - javascript/wcag_fixes.js
