@@ -6,4 +6,4 @@ This schedule will be primarily used as a history of topics that we have covered
 |                  | Unit: Introduction           |                                           |      |                                                                |
 | 1/19/26 (Week 1) | - Introduction to the course | [Introduction](lessons/1_introduction.md) |      | - [Homework 1](homework/1_c_review.md) : C Review (Due 2/6/26) |
 | 1/26/26 (Week 2) | - Basics<br>- C Review       | [C Review](lessons/2_reviewing_c.md)      |      |                                                                |
-| 1/2/26 (Week 3)  | - Algorithms<br>- Big O      | Algo + Big O (To be released)             |      | - Homework 2 : Measuring Speed (Due 2/13/26)                   |
+| 1/2/26 (Week 3)  | - Algorithms<br>- Big O      | Algo + Big O (To be released)             |      |                                                                |
