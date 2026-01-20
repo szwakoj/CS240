@@ -1,8 +1,11 @@
 # Introduction 
 
 This course is concerned with the study of data structures and algorithms in computer science. This lesson serves as an introduction to some of the core concepts that we will be building on over the course of this semester. Here we cover:
+
 - Computational Problems
+
 - Algorithms Basics
+
 - Introduce Data Structures
 ## Algorithms
 
@@ -12,11 +15,12 @@ What are algorithms? Algorithms have been at the core of your computer science j
 Even in your most rudimentary programs, you can understand them as solutions to some problem, or at least attempts at them. These problems can be as simple as to sort a list, find a max, or calculate an average, or as complex as retrieving the correct webpage given a search, training artificial intelligence systems efficiently, or landing a drone. All of the previous can be formalized into computational problems; problems that specify constraints on an input-output relationship.
 
  One such problem we will be tackling is the **sorting problem**, usually defined as:
+ 
 - **Plain English**
 	- Take in a sequence of amount of numbers and produce a sequence of the same numbers in order of least to greatest
 - **Formal Definition**
-	- Input: An array $A$ of $n$ numbers $[ a_0 , a_1, ..., a_{n-1} ]$
-	- Output: A permutation (reordering) $[ a^{\prime}_1 , a^{\prime}_2, ..., a^{\prime}_n ]$ of the input sequence such that $a^{\prime}_1 \leq a^{\prime}_2 \leq ... \leq a^{\prime}_n$
+	- Input: An array $A$ of $n$ numbers $[ a_0 , a_1, ..., a_{n-1} ]$, where $n > 0$
+	- Output: A permutation (reordering) $[ a^{\prime}_0 , a^{\prime}_1, ..., a^{\prime}_{n-1} ]$ of the input sequence such that $a^{\prime}_0 \leq a^{\prime}_1 \leq ... \leq a^{\prime}_{n-1}$
 
 Sorting is a very important operation in computer science, many problems require or are more easily solved if a sequence is ordered. It would be a good idea to absorb the definition of the sorting problem as we will be programming it and solutions to it soon.
 
@@ -34,7 +38,7 @@ Algorithms are solutions to computational problems. They take in a possible inst
 
 In previous courses, you may have been introduced to algorithms as a set of steps that accomplish a certain task. Or you may have used algorithms as backbones for the logic of your code, using them as a means of aiding in the problem solving process. Whether you realized it or not, algorithms are what define programs. All programs are implementations of some algorithm. For example, take a look a the following algorithm for finding the max in a collection of numbers:
 - Algorithm: Max Element
-	- Inputs: An array $A$ of $n$ numbers $[ a_0 , a_1, ..., a_{n-1} ]$
+	- Inputs: An array $A$ of $n$ numbers $[ a_0 , a_1, ..., a_{n-1} ]$, where $n > 0$
 	- Output: $a_m$ the maximum number in the sequence
 	- Procedure:
 		1. $max \gets A[0]$
@@ -80,7 +84,7 @@ Say we have the following problem:
 	- Linear Search: Find the index of a certain value in an array, return -1 if it does not exist
 - **Formal Definition**
 	- Input: 
-		- An array $A$ of $n$ numbers $[ a_0 , a_1, ..., a_{n-1} ]$
+		- An array $A$ of $n$ numbers $[ a_0 , a_1, ..., a_{n-1} ]$, where $n > 0$
 		- Target number $t$
 	- Output:  The smallest index $\text{i where } A[i]=t, or −1$ if no such index exists
 
@@ -93,7 +97,7 @@ Algorithms can be **incorrect** and solve only a subset of the possible instance
 Let's compare the correctness of two algorithms:
 - Algorithm: 404 Not Found
 	- Input: 
-		- An array $A$ of $n$ numbers $[ a_0 , a_1, ..., a_{n-1} ]$
+		- An array $A$ of $n$ numbers $[ a_0 , a_1, ..., a_{n-1} ]$, where $n > 0$
 		- Target number $t$
 	- Output: -1
 	- Procedure:
@@ -101,7 +105,7 @@ Let's compare the correctness of two algorithms:
 
 - Algorithm: Linear Search
 	- Input: 
-		- An array $A$ of $n$ numbers $[ a_0 , a_1, ..., a_{n-1} ]$
+		- An array $A$ of $n$ numbers $[ a_0 , a_1, ..., a_{n-1} ]$, where $n > 0$
 		- Target number $t$
 	- Output:  The smallest index $\text{i where } A[i]=t, or −1$ if no such index exists
 	- Procedure:
