@@ -27,6 +27,7 @@ Sorting is a very important operation in computer science, many problems require
 By formalizing the problem into a mathematical representation, we now have a general way of understanding the problem regardless of how we implement a check for it. The formal definition also gives a means of defining what a valid input is, or if something is an **instance** of the problem
 
 A single **instance** of a problem is a single valid input that satisfies the constraints of the problem's intended inputs. Each instance is an example of a possible problem from the formal definition. For our previous problem:
+
 - Instance of Sorting Problem
 	- $\langle 70, 55, 86, 12, 72, 20, 31, 3 \rangle$
 - Intended Output
@@ -37,6 +38,7 @@ How do we produce that intended output? Algorithms.
 Algorithms are solutions to computational problems. They take in a possible instance of the problem and are expected to produce a valid output. The process of each algorithm is different but boils down into taking in an input, transforming it, and producing an expected output. The transformation is done using a discrete number of ordered computational steps.
 
 In previous courses, you may have been introduced to algorithms as a set of steps that accomplish a certain task. Or you may have used algorithms as backbones for the logic of your code, using them as a means of aiding in the problem solving process. Whether you realized it or not, algorithms are what define programs. All programs are implementations of some algorithm. For example, take a look a the following algorithm for finding the max in a collection of numbers:
+
 - Algorithm: Max Element
 	- Inputs: An array $A$ of $n$ numbers $[ a_0 , a_1, ..., a_{n-1} ]$, where $n > 0$
 	- Output: $a_m$ the maximum number in the sequence
@@ -48,6 +50,7 @@ In previous courses, you may have been introduced to algorithms as a set of step
 			2. $\text{end if}$
 		3. $\text{end for}$
 		4. $\text{return } max$
+
 This algorithm could be written in any programming language:
 ```python
 # Python Max Element
@@ -80,6 +83,7 @@ In the pseudo code above, you may notice that the algorithm is defined along wit
 ### Assessing Algorithms
 
 Say we have the following problem:
+
 - **Plain English**
 	- Linear Search: Find the index of a certain value in an array, return -1 if it does not exist
 - **Formal Definition**
@@ -95,6 +99,7 @@ One way would be to check its correctness, or whether or not the algorithm can s
 Algorithms can be **incorrect** and solve only a subset of the possible instances of a computational problem. In these cases, we can assess what percentage of cases the algorithm solves for. While it may seem nonsensical and undesirable to have an algorithm that doesn't always work, there are times it can be beneficial, we will take a look at those at a later date. For the short-term, we will mostly be looking at algorithms that **solve** certain computational problems completely and are correct. 
 
 Let's compare the correctness of two algorithms:
+
 - Algorithm: 404 Not Found
 	- Input: 
 		- An array $A$ of $n$ numbers $[ a_0 , a_1, ..., a_{n-1} ]$, where $n > 0$
@@ -130,12 +135,19 @@ Each of the previous examples works on some form of data. Mostly **arrays**, or 
 The way you represent data for a given problem is called the **data structure**. **Data structures** are methods of storing and organizing data in some medium that allows for easy access and modification. Choosing the correct data structure has the possibility of trivializing the design of algorithms and the capability to make them for efficient.
 
 We will cover many data structures in the course this semester. Some highlights will be:
+
 - Arrays and Dynamic Arrays
+  
 - Linked Lists
+  
 - Stacks and Queues
+  
 - Trees
+  
 - Hash tables
+  
 - Graphs
+  
 Each one will become a well acquainted tool that you will use to deconstruct and solve problems effectively. In the short term we will be looking at algorithms first, for now, use this section as a means of introducing the idea and begin thinking about how the form of data can lend to problem solving.
 
 ## Optional Problems
