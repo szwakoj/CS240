@@ -53,7 +53,7 @@ nav:
     - Introduction: lessons/1_introduction.md
     - Reviewing C: lessons/2_reviewing_c.md
   - Labs:
-    - C Compilation: labs/c_compilation.md
+    - Lab: labs/lab.md
   - Homework:
     - How To Hand In: homework/how_to_hand_in.md
     - Homework 1 (Due 2/6/26): homework/1_c_review.md
