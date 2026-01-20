@@ -138,4 +138,21 @@ We will cover many data structures in the course this semester. Some highlights 
 - Graphs
 Each one will become a well acquainted tool that you will use to deconstruct and solve problems effectively. In the short term we will be looking at algorithms first, for now, use this section as a means of introducing the idea and begin thinking about how the form of data can lend to problem solving.
 
+## Optional Problems
 
+1. Other than correctness and speed/computational steps, what other ways can we measure the efficiency of an algorithm?
+   
+2. Think back to your time with the C programming Language, what were some of the core limitations of it that made it difficult to work with as an early programmer?
+
+3. For each function $f(n)$ and time $t$ in the following table, determine the largest size $n$ of a problem that can be solved in time $t$, assuming that the algorithm to solve the problem takes $f(n)$ microseconds.
+
+|            | 1 second | 1 minute | 1 hour | 1 day | 1 month | 1 year | 1 century |
+| ---------- | -------- | -------- | ------ | ----- | ------- | ------ | --------- |
+| $\log n$   |          |          |        |       |         |        |           |
+| $\sqrt{n}$ |          |          |        |       |         |        |           |
+| $n$        |          |          |        |       |         |        |           |
+| $n \log n$ |          |          |        |       |         |        |           |
+| $n^2$      |          |          |        |       |         |        |           |
+| $n^3$      |          |          |        |       |         |        |           |
+| $2^n$      |          |          |        |       |         |        |           |
+| $n!$       |          |          |        |       |         |        |           |
