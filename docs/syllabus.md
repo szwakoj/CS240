@@ -9,6 +9,7 @@
 
 On-Campus, 4 Credits
 
+Room: Kunsela Hall A135
 <br>
 
 **Meeting Times:** Tuesdays and Thursdays, 2:00pm - 3:50pm
