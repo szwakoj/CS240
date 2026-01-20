@@ -1023,27 +1023,43 @@
 </ul>
 <p>Sorting is a very important operation in computer science, many problems require or are more easily solved if a sequence is ordered. It would be a good idea to absorb the definition of the sorting problem as we will be programming it and solutions to it soon.</p>
 <p>By formalizing the problem into a mathematical representation, we now have a general way of understanding the problem regardless of how we implement a check for it. The formal definition also gives a means of defining what a valid input is, or if something is an <strong>instance</strong> of the problem</p>
-<p>A single <strong>instance</strong> of a problem is a single valid input that satisfies the constraints of the problem's intended inputs. Each instance is an example of a possible problem from the formal definition. For our previous problem:
-- Instance of Sorting Problem
-    - <span class="arithmatex">\(\langle 70, 55, 86, 12, 72, 20, 31, 3 \rangle\)</span>
-- Intended Output
-    -  <span class="arithmatex">\(\langle 3, 12, 20, 31, 55, 70, 72, 86\rangle\)</span></p>
+<p>A single <strong>instance</strong> of a problem is a single valid input that satisfies the constraints of the problem's intended inputs. Each instance is an example of a possible problem from the formal definition. For our previous problem:</p>
+<ul>
+<li>Instance of Sorting Problem<ul>
+<li><span class="arithmatex">\(\langle 70, 55, 86, 12, 72, 20, 31, 3 \rangle\)</span></li>
+</ul>
+</li>
+<li>Intended Output<ul>
+<li><span class="arithmatex">\(\langle 3, 12, 20, 31, 55, 70, 72, 86\rangle\)</span></li>
+</ul>
+</li>
+</ul>
 <h3 id="algorithms-as-solutions">Algorithms as Solutions</h3>
 <p>How do we produce that intended output? Algorithms.
 Algorithms are solutions to computational problems. They take in a possible instance of the problem and are expected to produce a valid output. The process of each algorithm is different but boils down into taking in an input, transforming it, and producing an expected output. The transformation is done using a discrete number of ordered computational steps.</p>
-<p>In previous courses, you may have been introduced to algorithms as a set of steps that accomplish a certain task. Or you may have used algorithms as backbones for the logic of your code, using them as a means of aiding in the problem solving process. Whether you realized it or not, algorithms are what define programs. All programs are implementations of some algorithm. For example, take a look a the following algorithm for finding the max in a collection of numbers:
-- Algorithm: Max Element
-    - Inputs: An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>, where <span class="arithmatex">\(n &gt; 0\)</span>
-    - Output: <span class="arithmatex">\(a_m\)</span> the maximum number in the sequence
-    - Procedure:
-        1. <span class="arithmatex">\(max \gets A[0]\)</span>
-        2. <span class="arithmatex">\(\text{for } i \gets 0 \text{ to } n -1 \text{ do:}\)</span>
-            1. <span class="arithmatex">\(\text{if } A[i] &gt; max \text{ then:}\)</span>
-                1. <span class="arithmatex">\(max \gets A[i]\)</span>
-            2. <span class="arithmatex">\(\text{end if}\)</span>
-        3. <span class="arithmatex">\(\text{end for}\)</span>
-        4. <span class="arithmatex">\(\text{return } max\)</span>
-This algorithm could be written in any programming language:</p>
+<p>In previous courses, you may have been introduced to algorithms as a set of steps that accomplish a certain task. Or you may have used algorithms as backbones for the logic of your code, using them as a means of aiding in the problem solving process. Whether you realized it or not, algorithms are what define programs. All programs are implementations of some algorithm. For example, take a look a the following algorithm for finding the max in a collection of numbers:</p>
+<ul>
+<li>Algorithm: Max Element<ul>
+<li>Inputs: An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>, where <span class="arithmatex">\(n &gt; 0\)</span></li>
+<li>Output: <span class="arithmatex">\(a_m\)</span> the maximum number in the sequence</li>
+<li>Procedure:<ol>
+<li><span class="arithmatex">\(max \gets A[0]\)</span></li>
+<li><span class="arithmatex">\(\text{for } i \gets 0 \text{ to } n -1 \text{ do:}\)</span><ol>
+<li><span class="arithmatex">\(\text{if } A[i] &gt; max \text{ then:}\)</span><ol>
+<li><span class="arithmatex">\(max \gets A[i]\)</span></li>
+</ol>
+</li>
+<li><span class="arithmatex">\(\text{end if}\)</span></li>
+</ol>
+</li>
+<li><span class="arithmatex">\(\text{end for}\)</span></li>
+<li><span class="arithmatex">\(\text{return } max\)</span></li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p>This algorithm could be written in any programming language:</p>
 <pre><code class="language-python"># Python Max Element
 def max_element(A):
     cur_max = A[0] 
@@ -1070,27 +1086,45 @@ int max_element(int n, int A[n])
 </code></pre>
 <p>In the pseudo code above, you may notice that the algorithm is defined along with the problem it is meant to solve, showing their relationship.</p>
 <h3 id="assessing-algorithms">Assessing Algorithms</h3>
-<p>Say we have the following problem:
-- <strong>Plain English</strong>
-    - Linear Search: Find the index of a certain value in an array, return -1 if it does not exist
-- <strong>Formal Definition</strong>
-    - Input: 
-        - An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>, where <span class="arithmatex">\(n &gt; 0\)</span>
-        - Target number <span class="arithmatex">\(t\)</span>
-    - Output:  The smallest index <span class="arithmatex">\(\text{i where } A[i]=t, or −1\)</span> if no such index exists</p>
+<p>Say we have the following problem:</p>
+<ul>
+<li><strong>Plain English</strong><ul>
+<li>Linear Search: Find the index of a certain value in an array, return -1 if it does not exist</li>
+</ul>
+</li>
+<li><strong>Formal Definition</strong><ul>
+<li>Input: <ul>
+<li>An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>, where <span class="arithmatex">\(n &gt; 0\)</span></li>
+<li>Target number <span class="arithmatex">\(t\)</span></li>
+</ul>
+</li>
+<li>Output:  The smallest index <span class="arithmatex">\(\text{i where } A[i]=t, or −1\)</span> if no such index exists</li>
+</ul>
+</li>
+</ul>
 <p>How would we assess two different algorithms that reportedly solve it?</p>
 <p>One way would be to check its correctness, or whether or not the algorithm can solve every instance of a problem. Algorithms that halt with the correct output for every input instance are said to be <strong>correct</strong> and <strong>solves</strong> the given computational problem. That word "halt" refers the requirement that a correct algorithms must terminate in finite time. A correct algorithm cannot sometimes give a correct answer on a given instance, and sometimes run infinitely as a possibility, it must stop.</p>
 <p>Algorithms can be <strong>incorrect</strong> and solve only a subset of the possible instances of a computational problem. In these cases, we can assess what percentage of cases the algorithm solves for. While it may seem nonsensical and undesirable to have an algorithm that doesn't always work, there are times it can be beneficial, we will take a look at those at a later date. For the short-term, we will mostly be looking at algorithms that <strong>solve</strong> certain computational problems completely and are correct. </p>
-<p>Let's compare the correctness of two algorithms:
-- Algorithm: 404 Not Found
-    - Input: 
-        - An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>, where <span class="arithmatex">\(n &gt; 0\)</span>
-        - Target number <span class="arithmatex">\(t\)</span>
-    - Output: -1
-    - Procedure:
-        - <span class="arithmatex">\(\text{return } -1\)</span></p>
+<p>Let's compare the correctness of two algorithms:</p>
 <ul>
-<li>Algorithm: Linear Search<ul>
+<li>
+<p>Algorithm: 404 Not Found</p>
+<ul>
+<li>Input: <ul>
+<li>An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>, where <span class="arithmatex">\(n &gt; 0\)</span></li>
+<li>Target number <span class="arithmatex">\(t\)</span></li>
+</ul>
+</li>
+<li>Output: -1</li>
+<li>Procedure:<ul>
+<li><span class="arithmatex">\(\text{return } -1\)</span></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Algorithm: Linear Search</p>
+<ul>
 <li>Input: <ul>
 <li>An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>, where <span class="arithmatex">\(n &gt; 0\)</span></li>
 <li>Target number <span class="arithmatex">\(t\)</span></li>
@@ -1120,14 +1154,28 @@ int max_element(int n, int A[n])
 <h2 id="data-structures">Data Structures</h2>
 <p>Each of the previous examples works on some form of data. Mostly <strong>arrays</strong>, or ordered numbers in a set size of contiguous memory. This will be covered more in <a href="docs/lessons/2_reviewing_c.md">C Review</a> and later in the data structures lessons, but it means that all data is stored physically next to each other. This creates some limitations with working with it as a medium of data in an algorithm. For example, to remove an element, all elements to the right of it must be shifted down by one in order to fill the empty space left by the removed element. This can be computationally expensive if you are removing and adding elements very quickly to different parts of the array during the run of an algorithm. In other cases, the way you represent the data can make solving problems faster.</p>
 <p>The way you represent data for a given problem is called the <strong>data structure</strong>. <strong>Data structures</strong> are methods of storing and organizing data in some medium that allows for easy access and modification. Choosing the correct data structure has the possibility of trivializing the design of algorithms and the capability to make them for efficient.</p>
-<p>We will cover many data structures in the course this semester. Some highlights will be:
-- Arrays and Dynamic Arrays
-- Linked Lists
-- Stacks and Queues
-- Trees
-- Hash tables
-- Graphs
-Each one will become a well acquainted tool that you will use to deconstruct and solve problems effectively. In the short term we will be looking at algorithms first, for now, use this section as a means of introducing the idea and begin thinking about how the form of data can lend to problem solving.</p>
+<p>We will cover many data structures in the course this semester. Some highlights will be:</p>
+<ul>
+<li>
+<p>Arrays and Dynamic Arrays</p>
+</li>
+<li>
+<p>Linked Lists</p>
+</li>
+<li>
+<p>Stacks and Queues</p>
+</li>
+<li>
+<p>Trees</p>
+</li>
+<li>
+<p>Hash tables</p>
+</li>
+<li>
+<p>Graphs</p>
+</li>
+</ul>
+<p>Each one will become a well acquainted tool that you will use to deconstruct and solve problems effectively. In the short term we will be looking at algorithms first, for now, use this section as a means of introducing the idea and begin thinking about how the form of data can lend to problem solving.</p>
 <h2 id="optional-problems">Optional Problems</h2>
 <ol>
 <li>
