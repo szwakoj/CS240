@@ -1,51 +1,22 @@
 # Glossary
 
-hierarchy
+**Computational Problems**
+	Problems that specify constraints on an input-output relationship.
 
-Organization and Architecture of computer systems
+**Instance**
+	A single valid input that satisfies the constraints of the problem's intended inputs. Each instance is an example of a possible problem from the formal definition.
 
-von Neumann Model
+**Algorithms**
+	Solutions to computational problems. They take in a possible instance of the problem and are expected to produce a valid output. The transformation is done using a discrete number of ordered computational steps.
 
-CPU
+**Correct Algorithm**
+	An algorithm that halts with the correct output for every input instance. A correct algorithm solves the given computational problem and must terminate in finite time.
 
-ALU
+**Incorrect Algorithm**
+	An algorithm that solves only a subset of the possible instances of a computational problem.
 
-RAM
+**Data Structure**
+	Methods of storing and organizing data in some medium that allows for easy access and modification.
 
-I/O Devices
-
-Hard Drives
-
-Digital Logic
-
-Microprogramming
-
-Machine and Assembly language
-
-Binary
-
-Arithmetic
-
-Transistors
-
-CMOS
-
-GPU
-
-parallelism
-
-Computer
-
-Computer Hardware
-
-hexadecimal
-
-Number systems 
-
-Bit, nibble, byte
-
-chunks
-
-Circuits
-
-Truth Table
+**Array**
+	Ordered numbers in a set size of contiguous memory, meaning that all data is stored physically next to each other.
