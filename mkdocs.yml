@@ -26,9 +26,13 @@ theme:
   
 markdown_extensions:
   - tables
+  - pymdownx.arithmatex:
+    generic: true
 
 extra_javascript:
   - javascript/wcag_fixes.js
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
 extra_css:
   - stylesheets/extra.css
