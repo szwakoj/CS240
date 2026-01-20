@@ -971,42 +971,56 @@
 
 
 <h1 id="introduction">Introduction</h1>
-<p>This course is concerned with the study of data structures and algorithms in computer science. This lesson serves as an introduction to some of the core concepts that we will be building on over the course of this semester. Here we cover:
-- Computational Problems
-- Algorithms Basics
-- Introduce Data Structures</p>
+<p>This course is concerned with the study of data structures and algorithms in computer science. This lesson serves as an introduction to some of the core concepts that we will be building on over the course of this semester. Here we cover:</p>
+<ul>
+<li>
+<p>Computational Problems</p>
+</li>
+<li>
+<p>Algorithms Basics</p>
+</li>
+<li>
+<p>Introduce Data Structures</p>
+</li>
+</ul>
 <h2 id="algorithms">Algorithms</h2>
 <p>What are algorithms? Algorithms have been at the core of your computer science journey since its beginning, however before understanding them more deeply, we must first know why they exist in the first place.</p>
 <h3 id="problems">Problems</h3>
 <p>Even in your most rudimentary programs, you can understand them as solutions to some problem, or at least attempts at them. These problems can be as simple as to sort a list, find a max, or calculate an average, or as complex as retrieving the correct webpage given a search, training artificial intelligence systems efficiently, or landing a drone. All of the previous can be formalized into computational problems; problems that specify constraints on an input-output relationship.</p>
-<p>One such problem we will be tackling is the <strong>sorting problem</strong>, usually defined as:
-- <strong>Plain English</strong>
-    - Take in a sequence of amount of numbers and produce a sequence of the same numbers in order of least to greatest
-- <strong>Formal Definition</strong>
-    - Input: An array $A$ of $n$ numbers $[ a_0 , a_1, ..., a_{n-1} ]$
-    - Output: A permutation (reordering) $[ a^{\prime}_1 , a^{\prime}_2, ..., a^{\prime}_n ]$ of the input sequence such that $a^{\prime}_1 \leq a^{\prime}_2 \leq ... \leq a^{\prime}_n$</p>
+<p>One such problem we will be tackling is the <strong>sorting problem</strong>, usually defined as:</p>
+<ul>
+<li><strong>Plain English</strong><ul>
+<li>Take in a sequence of amount of numbers and produce a sequence of the same numbers in order of least to greatest</li>
+</ul>
+</li>
+<li><strong>Formal Definition</strong><ul>
+<li>Input: An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span></li>
+<li>Output: A permutation (reordering) <span class="arithmatex">\([ a^{\prime}_1 , a^{\prime}_2, ..., a^{\prime}_n ]\)</span> of the input sequence such that <span class="arithmatex">\(a^{\prime}_1 \leq a^{\prime}_2 \leq ... \leq a^{\prime}_n\)</span></li>
+</ul>
+</li>
+</ul>
 <p>Sorting is a very important operation in computer science, many problems require or are more easily solved if a sequence is ordered. It would be a good idea to absorb the definition of the sorting problem as we will be programming it and solutions to it soon.</p>
 <p>By formalizing the problem into a mathematical representation, we now have a general way of understanding the problem regardless of how we implement a check for it. The formal definition also gives a means of defining what a valid input is, or if something is an <strong>instance</strong> of the problem</p>
 <p>A single <strong>instance</strong> of a problem is a single valid input that satisfies the constraints of the problem's intended inputs. Each instance is an example of a possible problem from the formal definition. For our previous problem:
 - Instance of Sorting Problem
-    - $\langle 70, 55, 86, 12, 72, 20, 31, 3 \rangle$
+    - <span class="arithmatex">\(\langle 70, 55, 86, 12, 72, 20, 31, 3 \rangle\)</span>
 - Intended Output
-    -  $\langle 3, 12, 20, 31, 55, 70, 72, 86\rangle$</p>
+    -  <span class="arithmatex">\(\langle 3, 12, 20, 31, 55, 70, 72, 86\rangle\)</span></p>
 <h3 id="algorithms-as-solutions">Algorithms as Solutions</h3>
 <p>How do we produce that intended output? Algorithms.
 Algorithms are solutions to computational problems. They take in a possible instance of the problem and are expected to produce a valid output. The process of each algorithm is different but boils down into taking in an input, transforming it, and producing an expected output. The transformation is done using a discrete number of ordered computational steps.</p>
 <p>In previous courses, you may have been introduced to algorithms as a set of steps that accomplish a certain task. Or you may have used algorithms as backbones for the logic of your code, using them as a means of aiding in the problem solving process. Whether you realized it or not, algorithms are what define programs. All programs are implementations of some algorithm. For example, take a look a the following algorithm for finding the max in a collection of numbers:
 - Algorithm: Max Element
-    - Inputs: An array $A$ of $n$ numbers $[ a_0 , a_1, ..., a_{n-1} ]$
-    - Output: $a_m$ the maximum number in the sequence
+    - Inputs: An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>
+    - Output: <span class="arithmatex">\(a_m\)</span> the maximum number in the sequence
     - Procedure:
-        1. $max \gets A[0]$
-        2. $\text{for } i \gets 0 \text{ to } n -1 \text{ do:}$
-            1. $\text{if } A[i] &gt; max \text{ then:}$
-                1. $max \gets A[i]$
-            2. $\text{end if}$
-        3. $\text{end for}$
-        4. $\text{return } max$
+        1. <span class="arithmatex">\(max \gets A[0]\)</span>
+        2. <span class="arithmatex">\(\text{for } i \gets 0 \text{ to } n -1 \text{ do:}\)</span>
+            1. <span class="arithmatex">\(\text{if } A[i] &gt; max \text{ then:}\)</span>
+                1. <span class="arithmatex">\(max \gets A[i]\)</span>
+            2. <span class="arithmatex">\(\text{end if}\)</span>
+        3. <span class="arithmatex">\(\text{end for}\)</span>
+        4. <span class="arithmatex">\(\text{return } max\)</span>
 This algorithm could be written in any programming language:</p>
 <pre><code class="language-python"># Python Max Element
 def max_element(A):
@@ -1039,39 +1053,39 @@ int max_element(int n, int A[n])
     - Linear Search: Find the index of a certain value in an array, return -1 if it does not exist
 - <strong>Formal Definition</strong>
     - Input: 
-        - An array $A$ of $n$ numbers $[ a_0 , a_1, ..., a_{n-1} ]$
-        - Target number $t$
-    - Output:  The smallest index $\text{i where } A[i]=t, or −1$ if no such index exists</p>
+        - An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>
+        - Target number <span class="arithmatex">\(t\)</span>
+    - Output:  The smallest index <span class="arithmatex">\(\text{i where } A[i]=t, or −1\)</span> if no such index exists</p>
 <p>How would we assess two different algorithms that reportedly solve it?</p>
 <p>One way would be to check its correctness, or whether or not the algorithm can solve every instance of a problem. Algorithms that halt with the correct output for every input instance are said to be <strong>correct</strong> and <strong>solves</strong> the given computational problem. That word "halt" refers the requirement that a correct algorithms must terminate in finite time. A correct algorithm cannot sometimes give a correct answer on a given instance, and sometimes run infinitely as a possibility, it must stop.</p>
 <p>Algorithms can be <strong>incorrect</strong> and solve only a subset of the possible instances of a computational problem. In these cases, we can assess what percentage of cases the algorithm solves for. While it may seem nonsensical and undesirable to have an algorithm that doesn't always work, there are times it can be beneficial, we will take a look at those at a later date. For the short-term, we will mostly be looking at algorithms that <strong>solve</strong> certain computational problems completely and are correct. </p>
 <p>Let's compare the correctness of two algorithms:
 - Algorithm: 404 Not Found
     - Input: 
-        - An array $A$ of $n$ numbers $[ a_0 , a_1, ..., a_{n-1} ]$
-        - Target number $t$
+        - An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>
+        - Target number <span class="arithmatex">\(t\)</span>
     - Output: -1
     - Procedure:
-        - $\text{return } -1$</p>
+        - <span class="arithmatex">\(\text{return } -1\)</span></p>
 <ul>
 <li>Algorithm: Linear Search<ul>
 <li>Input: <ul>
-<li>An array $A$ of $n$ numbers $[ a_0 , a_1, ..., a_{n-1} ]$</li>
-<li>Target number $t$</li>
+<li>An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span></li>
+<li>Target number <span class="arithmatex">\(t\)</span></li>
 </ul>
 </li>
-<li>Output:  The smallest index $\text{i where } A[i]=t, or −1$ if no such index exists</li>
+<li>Output:  The smallest index <span class="arithmatex">\(\text{i where } A[i]=t, or −1\)</span> if no such index exists</li>
 <li>Procedure:<ol>
-<li>$\text{for } i \gets 0 \text{ to } n-1 \text{ do:}$<ol>
-<li>$\text{if } A[i] = t \text{ then:}$<ol>
-<li>$\text{return } i$</li>
+<li><span class="arithmatex">\(\text{for } i \gets 0 \text{ to } n-1 \text{ do:}\)</span><ol>
+<li><span class="arithmatex">\(\text{if } A[i] = t \text{ then:}\)</span><ol>
+<li><span class="arithmatex">\(\text{return } i\)</span></li>
 </ol>
 </li>
-<li>$\text{end if}$</li>
+<li><span class="arithmatex">\(\text{end if}\)</span></li>
 </ol>
 </li>
-<li>$\text{end for}$</li>
-<li>$\text{return } -1$</li>
+<li><span class="arithmatex">\(\text{end for}\)</span></li>
+<li><span class="arithmatex">\(\text{return } -1\)</span></li>
 </ol>
 </li>
 </ul>
@@ -1079,7 +1093,7 @@ int max_element(int n, int A[n])
 </ul>
 <p>Obviously, "404 Not Found" is an incomplete algorithm, it always assumes that the target number is not in the input array. For Linear Search, however, we can be pretty sure that it will work for all instances of the problem. There are ways to test this, and we will take a look at those at a later date.</p>
 <p>Another way to assess an algorithm, is by how fast it runs. While it may not be true 100% of the time, in instances where the target number is not within the input array, "404 Not Found" will be faster than "Linear Search". </p>
-<p>No mater what input array given, "404 Not Found" will produce an output in a single computational step. If that computational step took 1 second, no matter the size of $n$, or the size of the input array, "404 Not Found" will always take 1 second to complete. "Linear Search" on the other hand requires many more computational steps to complete. Mainly, it loops through each element of the array until the end in the event of the target not existing. At each iteration of the loop there is a comparison operation, if we take the 1 second time estimate from before then we get a time of $n$ seconds if the target doesn't exist. </p>
+<p>No mater what input array given, "404 Not Found" will produce an output in a single computational step. If that computational step took 1 second, no matter the size of <span class="arithmatex">\(n\)</span>, or the size of the input array, "404 Not Found" will always take 1 second to complete. "Linear Search" on the other hand requires many more computational steps to complete. Mainly, it loops through each element of the array until the end in the event of the target not existing. At each iteration of the loop there is a comparison operation, if we take the 1 second time estimate from before then we get a time of <span class="arithmatex">\(n\)</span> seconds if the target doesn't exist. </p>
 <p>While this is a simple example, this process can be done on any algorithm and estimate its so called time complexity, a future topic.</p>
 <h2 id="data-structures">Data Structures</h2>
 <p>Each of the previous examples works on some form of data. Mostly <strong>arrays</strong>, or ordered numbers in a set size of contiguous memory. This will be covered more in <a href="docs/lessons/2_reviewing_c.md">C Review</a> and later in the data structures lessons, but it means that all data is stored physically next to each other. This creates some limitations with working with it as a medium of data in an algorithm. For example, to remove an element, all elements to the right of it must be shifted down by one in order to fill the empty space left by the removed element. This can be computationally expensive if you are removing and adding elements very quickly to different parts of the array during the run of an algorithm. In other cases, the way you represent the data can make solving problems faster.</p>
@@ -1147,6 +1161,10 @@ Each one will become a well acquainted tool that you will use to deconstruct and
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="../../javascript/wcag_fixes.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>
