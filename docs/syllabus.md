@@ -18,6 +18,8 @@ Room: Kunsela Hall A135
 ## Office Hours and Contact Info
 **Instructor:** John Szwakob III (Mr. S)
 
+**Office Location:** Kunsela Hall C127
+
 **Office Hours:**
 
 - Mondays 2:00pm - 4:00pm
