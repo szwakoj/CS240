@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../how_to_hand_in/">
+        <link rel="prev" href="../gcc_install/">
       
       
       
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#c-review" class="md-skip">
+        <a href="#c-review-text-adventure-game" class="md-skip">
           Skip to content
         </a>
       
@@ -677,6 +677,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../gcc_install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installing Software
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -688,6 +716,24 @@
       
         
       
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Homework 1 (Due 2/6/26)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -705,6 +751,69 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#due-date-21326" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Due Date: 2/13/26
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description:
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-1-setting-up-basic_gamec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 1: Setting Up (basic_game.c)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-2-expanding-the-world-text_gamec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 2: Expanding the World (text_game.c)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -737,6 +846,58 @@
   
     
   
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#due-date-21326" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Due Date: 2/13/26
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Description:
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-1-setting-up-basic_gamec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 1: Setting Up (basic_game.c)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-2-expanding-the-world-text_gamec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 2: Expanding the World (text_game.c)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -801,8 +962,56 @@
 
 
 
-<h1 id="c-review">C Review</h1>
-<p>(Will be Posted 1/29/25)</p>
+<h1 id="c-review-text-adventure-game">C Review: Text Adventure Game</h1>
+<h2 id="due-date-21326">Due Date: 2/13/26</h2>
+<h2 id="description">Description:</h2>
+<p>In this homework, you will construct a text adventure game in the style of classics like <a href="https://en.wikipedia.org/wiki/Zork">Zork</a>, <a href="https://en.wikipedia.org/wiki/The_Hobbit_(1982_video_game)">The Hobbit</a>, and <a href="https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy_(video_game)">The Hitchhiker's Guide to the Galaxy</a> but simplified to a manageable scope. You are to create a text adventure in the command-line using the C programming language and rooms that I provide in the form of text files. You will be implementing the data structures and algorithms to facilitate the gameplay and read in arbitrary room files.</p>
+<p>If you are unfamiliar to the idea of a text-based adventure game, here are some defining features:</p>
+<ul>
+<li>A terminal interface for the user to enter action commands from a narrow subset<ul>
+<li>Commands like "look", "go {north|east|south|west}", and "grab {item}" are classic examples</li>
+</ul>
+</li>
+<li>Text that prompts the user as to where they are in the game world<ul>
+<li>"You awake in your bed room in the South side of the room. To the North is the door to the rest of your house. To the West, your window. To the East, is your desk with something shiny on it"</li>
+</ul>
+</li>
+<li>A method of keeping track of player actions<ul>
+<li>Usually an inventory of items that puzzles require for solving</li>
+</ul>
+</li>
+<li>If you want a better idea, click <a href="https://www.web-adventures.org/cgi-bin/webfrotz?s=ZorkDungeon">this link</a>, to go to a web-based version of ZORK. Play for a little while to get the gist and experience video game history </li>
+</ul>
+<p>To make sure the scope doesn't go too wild for a first assignment the following restrictions and changes will be made to the program you produce <strong>by the end</strong> of the assignment:</p>
+<ul>
+<li>I will provide template rooms that you will fill in</li>
+<li>You will only need to implement movement and grabbing a single key for the commands<ul>
+<li>I.e. "go North", "go South", "grab key" (when in proper room)</li>
+</ul>
+</li>
+<li>There will only need to be a minimum of 6 rooms that with a structure that contains:<ul>
+<li>at least one dead-end (you need to go back one in order to find the exit)</li>
+<li>at least one cycle (you could loop in to the same rooms if you repeat the same commands)</li>
+<li>a room with a key</li>
+<li>a room with a locked door that will end the game when unlocked</li>
+</ul>
+</li>
+</ul>
+<p>In order to accomplish this game, we are going to split the work into to main parts:</p>
+<ul>
+<li>Section 1: Setting Up<ul>
+<li>This part will focus on setting up the basic data structures, reading file data, and creating the user interface for a small version of the full game</li>
+<li>You will start by parsing a room files that I provide to you, creating a struct to store that data, and navigating the basic rooms by implementing the movement command parser</li>
+</ul>
+</li>
+<li>Section 2: Expanding the World<ul>
+<li>With the data structures in place and a small example, you will now expand on the groundwork from the previous part and create your own room descriptions and layout while also adding in the key mechanics</li>
+</ul>
+</li>
+</ul>
+<h2 id="section-1-setting-up-basic_gamec">Section 1: Setting Up (basic_game.c)</h2>
+<p>Click <a href="../HW1_Start.zip">here</a> , to download the starting point that I have created for you. It is also on Brightspace, under Content-&gt;Homework 1. Unzip it into the place you are completing Homework 1, Section 1. </p>
+<h2 id="section-2-expanding-the-world-text_gamec">Section 2: Expanding the World (text_game.c)</h2>
 
 
 
