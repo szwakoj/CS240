@@ -1,9 +1,10 @@
 ### **DISCLAIMER**
 This schedule will be primarily used as a history of topics that we have covered thus far, as well as a short look into the future. To best attend to the class' pace, future looks will be limited to 1-2 weeks ahead with all due dates known when assignments are given and quiz/test dates when they are announced. Any changes made to significant dates will be in the students favor, if they happen. 
 
-| Date             | Topic                        | Lessons                                   | Labs | Homework                                                                            |
-| ---------------- | ---------------------------- | ----------------------------------------- | ---- | ----------------------------------------------------------------------------------- |
-|                  | Unit: Introduction           |                                           |      |                                                                                     |
-| 1/19/26 (Week 1) | - Introduction to the course | [Introduction](lessons/1_introduction.md) |      |                                                                                     |
-| 1/26/26 (Week 2) | - Basics<br>- C Review       | [C Review](lessons/2_reviewing_c.md)      |      | - [Homework 1](homework/1_c_review.md) : C Review (Due 2/13/26) (To be posted 1/26) |
-| 2/2/26 (Week 3)  | - Algorithms<br>- Big O      | Algo + Big O (To be released)             |      |                                                                                     |
+| Date             | Topic                                      | Lessons                                                                             | Labs | Homework                                                                           |
+| ---------------- | ------------------------------------------ | ----------------------------------------------------------------------------------- | ---- | ---------------------------------------------------------------------------------- |
+|                  | Unit: Introduction                         |                                                                                     |      |                                                                                    |
+| 1/19/26 (Week 1) | - Syllabus<br>- Introduction to the course |                                                                                     |      |                                                                                    |
+| 1/26/26 (Week 2) | - Basics<br>- C Install                    | [Introduction](lessons/1_introduction.md)<br>[Install gcc](homework/gcc_install.md) |      | - [Homework 1](homework/1_c_review.md) : C Review (Due 2/20/26) (To be posted 2/1) |
+| 2/2/26 (Week 3)  | - C Review<br>- Arrays and Strings         | [C Review](lessons/2_reviewing_c.md)                                                |      |                                                                                    |
+| 2/9/26 (Week 4)  | - Algorithms<br>- Big O                    |                                                                                     |      |                                                                                    |
