@@ -1,0 +1,1464 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../2_reviewing_c/">
+      
+      
+        <link rel="next" href="../4_big_o/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../img/cs240.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Runtime Basics - CS 240 - Data Structures and Algorithms</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#runtime-analysis-fundamentals" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="CS 240 - Data Structures and Algorithms" class="md-header__button md-logo" aria-label="CS 240 - Data Structures and Algorithms" data-md-component="logo">
+      
+  <img src="../../img/cs240.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CS 240 - Data Structures and Algorithms
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Runtime Basics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0 9.821 9.821 0 0 0-17.64 0"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../syllabus/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Syllabus
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../schedule/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Schedule
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../glossary/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Glossary
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../1_introduction/" class="md-tabs__link">
+          
+  
+  
+  Lessons
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../labs/1_insertion_breakdown/" class="md-tabs__link">
+          
+  
+  
+  Labs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../homework/how_to_hand_in/" class="md-tabs__link">
+          
+  
+  
+  Homework
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="CS 240 - Data Structures and Algorithms" class="md-nav__button md-logo" aria-label="CS 240 - Data Structures and Algorithms" data-md-component="logo">
+      
+  <img src="../../img/cs240.png" alt="logo">
+
+    </a>
+    CS 240 - Data Structures and Algorithms
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../syllabus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syllabus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schedule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schedule
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lessons
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lessons
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_reviewing_c/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reviewing C
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Runtime Basics
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Runtime Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Algorithms
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Algorithms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input Size
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runtime-of-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Runtime of Algorithms
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#growth-of-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Growth of Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_big_o/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Big O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../labs/1_insertion_breakdown/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Labs
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../homework/how_to_hand_in/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Homework
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Algorithms
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Algorithms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input Size
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runtime-of-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Runtime of Algorithms
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#growth-of-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Growth of Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../1_introduction/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Lessons
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="runtime-analysis-fundamentals">Runtime Analysis Fundamentals</h1>
+<p>Why do some programs feel fast while others make us want to throw our computers out the window? Why does sorting 100 items take milliseconds but sorting 100,000 items takes minutes? The answer lies in understanding how algorithms scale.</p>
+<p>In this lesson, we'll develop a mathematical framework for measuring runtime that works regardless of what computer you're using or what programming language you choose.</p>
+<p>This lesson covers how to:</p>
+<ul>
+<li>Explain why we can't just time algorithms to compare them</li>
+<li>Construct a runtime function T(n) for simple algorithms</li>
+<li>Identify the dominant components that drive runtime growth</li>
+<li>Recognize common patterns of growth (linear, quadratic, logarithmic, etc.)</li>
+<li>Predict which of two algorithms will be faster for large inputs</li>
+</ul>
+<h2 id="algorithms">Algorithms</h2>
+<p>To review briefly:</p>
+<ul>
+<li>Computational problems are formal definitions of problems that outline the intended input and the desired output</li>
+<li>Algorithms are solutions to computational problems that use a finite number of sequential steps to go from input to desired output</li>
+<li>Programs are implementations of algorithms </li>
+<li>The most basic way to assess an algorithm is to measure how many of the possible inputs can be solved using it, if it solves all problem instances, it is said to be correct. It is incorrect if it does not solve for one or more instances of the problem space</li>
+</ul>
+<p>Now that the background is laid, we need to consider other ways of assessing algorithms, especially in terms that relate to programs and the domain we are solving in, digital computers. When speaking about modern computers, there are two basic attributes that dictate how good a computer is viewed in the modern day:</p>
+<ul>
+<li><strong>Execution Speed:</strong> How fast operations are being executed</li>
+<li><strong>Memory Size:</strong> How much space do we have to store information</li>
+</ul>
+<p>In the same light, we assess the programs we use in these terms too. If a program is too slow, or uses too much RAM, we do not like it and identify it as a problem. Computers have gotten so good that we assume that all algorithms/programs are correct, it is just a matter of speed and resources. </p>
+<div class="admonition note">
+<p class="admonition-title">Correctness Going Forward</p>
+<p>While correctness is probably the most important metric we could measure from an algorithm, we will always be attempting to make algorithms completely correct by default. This shifts the focus to those two attributes above. In fact, in most formal definitions algorithms are assumed to be correct. This lead to the division between <strong>deterministic algorithms</strong>; algorithms that have completely predicable behavior, always producing the same, correct output for any given input. And <strong>probabilistic algorithms</strong>; algorithms that use randomness in their execution, which means their correctness, runtime, or memory usage may vary between runs even with identical inputs. We mainly focus on pure, correct, deterministic algorithms, but by the end of the semester we will see some probabilistic algorithms.</p>
+</div>
+<h3 id="input-size">Input Size</h3>
+<p>With this in mind, how do we measure the time an algorithm takes or how much memory it takes up? To begin to tackle this, we should identify that the size of the input matters a lot for both of these metrics.</p>
+<p><strong>Input size</strong> depends on the problem being solved. For the problems we covered before like search, finding a max, or sorting, the input size is the amount of items in the input array/list. Take the finding max example from before:</p>
+<ul>
+<li>Algorithm: Max Element<ul>
+<li>Inputs: An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([ a_0 , a_1, ..., a_{n-1} ]\)</span>, where <span class="arithmatex">\(n &gt; 0\)</span></li>
+<li>Output: <span class="arithmatex">\(a_m\)</span> the maximum number in the sequence</li>
+<li>Procedure:<ol>
+<li><span class="arithmatex">\(max \gets A[0]\)</span></li>
+<li><span class="arithmatex">\(\text{for } i \gets 0 \text{ to } n -1 \text{ do:}\)</span><ol>
+<li><span class="arithmatex">\(\text{if } A[i] &gt; max \text{ then:}\)</span><ol>
+<li><span class="arithmatex">\(max \gets A[i]\)</span></li>
+</ol>
+</li>
+<li><span class="arithmatex">\(\text{end if}\)</span></li>
+</ol>
+</li>
+<li><span class="arithmatex">\(\text{end for}\)</span></li>
+<li><span class="arithmatex">\(\text{return } max\)</span></li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p>Here the input size is denoted with <span class="arithmatex">\(n\)</span>, as <span class="arithmatex">\(n\)</span> increases, the algorithm will need to run more times, since its for loop is bounded by <span class="arithmatex">\(n-1\)</span>.  However, input size does not need to be connected to the number of elements in an array, it could be the size of the numbers coming in, take the following algorithm for two binary numbers being added: </p>
+<ul>
+<li>Algorithm: Binary Addition <ul>
+<li>Inputs: Two binary numbers <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span> of <span class="arithmatex">\(n\)</span> bits each, <span class="arithmatex">\(A = [a_{n-1}, a_{n-2}, ..., a_0]\)</span> and <span class="arithmatex">\(B = [b_{n-1}, b_{n-2}, ..., b_0]\)</span> </li>
+<li>Output: Binary number <span class="arithmatex">\(C\)</span> representing <span class="arithmatex">\(A + B\)</span> </li>
+<li>Procedure: <ol>
+<li><span class="arithmatex">\(carry \gets 0\)</span> </li>
+<li><span class="arithmatex">\(C \gets \text{empty array of size } n+1\)</span> </li>
+<li><span class="arithmatex">\(\text{for } i \gets 0 \text{ to } n-1 \text{ do:}\)</span> <ol>
+<li><span class="arithmatex">\(sum \gets a_i + b_i + carry\)</span> </li>
+<li><span class="arithmatex">\(C[i] \gets sum \mod 2\)</span> </li>
+<li><span class="arithmatex">\(carry \gets \lfloor sum / 2 \rfloor\)</span> </li>
+</ol>
+</li>
+<li><span class="arithmatex">\(\text{end for}\)</span> </li>
+<li><span class="arithmatex">\(C[n] \gets carry\)</span> </li>
+<li><span class="arithmatex">\(\text{return } C\)</span></li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p>Here we add two numbers always, but their sizes deem how long the algorithm runs. So its not always about lists or collections alone, but the size of the data being represented.</p>
+<h3 id="runtime-of-algorithms">Runtime of Algorithms</h3>
+<p>We keep talking about the amount of time it takes an algorithm to run or if an algorithm is slow or fast, how can we measure that? Is it just the time it takes for the program implementing an algorithm to run on some computer? Let's test this, say we have two programs that implement the same algorithm and are given the same input. Further imagine that we have Computer A and Computer B. If we run both programs on Computer A, they will take the same amount of time to run, lets say 5 microseconds. We then move one copy of the program to Computer B and then race the two computers running the same program on the same input as before. We get the following results: </p>
+<ul>
+<li><strong>Results</strong><ul>
+<li>Program on Computer A = 5 microseconds</li>
+<li>Program on Computer B = 10 microseconds</li>
+</ul>
+</li>
+</ul>
+<p>Without knowing about the specs of A or B, we can see that B probably is a worse computer. However, which number would we use as the runtime for our algorithm given the input? What would happen if we programmed them in a different language that sped up or slowed down the program?</p>
+<p>These questions are the reason why the runtime of an algorithm is not usually measured using the physical time it takes for an algorithm to generate an output for a given input. It is completely dependent on the implementation of the algorithm and where it is being ran, which makes it not the best metric for these abstract, almost universal algorithms. </p>
+<p>To attend to this nature, the <strong>runtime (or running time)</strong> of an algorithm on a particular input is measured using the number of primitive operations or "steps" executed. These primitive operations are meant to be machine-independent and assumed they all take a constant amount of time. For us, this means we assume that each line of pseudocode of an algorithm takes a constant amount of time for a hypothetical computer to accomplish, lets call the amount of time <span class="arithmatex">\(c\)</span>. Some lines of the pseudocode may take longer than others, so lets say that <span class="arithmatex">\(c_i\)</span> is the constant amount of time it takes for line number <span class="arithmatex">\(i\)</span> of pseudocode to run. </p>
+<p>Using this notation we can develop an equation to measure the amount of time it takes for an algorithm to run. The following is an exercise in breaking down the Max-Element Algorithm from before. Note that, we will not be doing this entire process for every algorithm we want to compare (it gets messy), but we will use it to derive a more general and simple process for estimating the run time of an algorithm.</p>
+<p>Here is the algorithm from before with the amount of time each line it takes and the number of times that line will be run labeled with it:</p>
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Step</th>
+<th><span class="arithmatex">\(c_i\)</span></th>
+<th>Number of Times</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(max \gets A[0]\)</span></td>
+<td><span class="arithmatex">\(c_1\)</span></td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(\text{for } i \gets 0 \text{ to } n -1 \text{ do:}\)</span></td>
+<td><span class="arithmatex">\(c_2\)</span></td>
+<td><span class="arithmatex">\(n+1\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td>&emsp;<span class="arithmatex">\(\text{if } A[i] &gt; max \text{ then:}\)</span></td>
+<td><span class="arithmatex">\(c_3\)</span></td>
+<td><span class="arithmatex">\(n\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td>&emsp;&emsp;<span class="arithmatex">\(max \gets A[i]\)</span></td>
+<td><span class="arithmatex">\(c_4\)</span></td>
+<td><span class="arithmatex">\([0,n]\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td>&emsp;<span class="arithmatex">\(\text{end if}\)</span></td>
+<td>0</td>
+<td><span class="arithmatex">\(n\)</span></td>
+</tr>
+<tr>
+<td>6</td>
+<td><span class="arithmatex">\(\text{end for}\)</span></td>
+<td>0</td>
+<td><span class="arithmatex">\(n+1\)</span></td>
+</tr>
+<tr>
+<td>7</td>
+<td><span class="arithmatex">\(\text{return } max\)</span></td>
+<td><span class="arithmatex">\(c_7\)</span></td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>Some things worth to mention before moving on:</p>
+<ul>
+<li>Notice that steps that are not within a loop are ran only once</li>
+<li>The for loop is ran <span class="arithmatex">\(n+1\)</span> times but its contents run <span class="arithmatex">\(n\)</span> times because the <span class="arithmatex">\(for\)</span> loop is evaluating until the condition is found to be false, meaning it will run <span class="arithmatex">\(n\)</span> times and then check its exit condition, adding another operation.</li>
+<li>The if statement is checked each time the loop is ran, but its contents could run anywhere between <span class="arithmatex">\(0\)</span> and <span class="arithmatex">\(n\)</span> times. This is because depending on the input, it might not be ran (if the max is the first element) or it will be ran each iteration (the list is sorted and the final element is max). The range lower bound gives us the <strong>best case</strong> and the upper bound gives us the <strong>worst case</strong>.</li>
+<li>The <span class="arithmatex">\(end\)</span> statements do not actually cost any time, these are just notations for pseudocode and can be omitted most times. </li>
+</ul>
+<p>To get the amount of time each operation takes for an input of size <span class="arithmatex">\(n\)</span> id quite easy, just multiply the constant time it takes to run that line and the number of times it will be ran based on <span class="arithmatex">\(n\)</span>:</p>
+<ul>
+<li>Step 1: <span class="arithmatex">\((c_1)(1) = c_1\)</span><ul>
+<li>This makes sense since this step is always ran once, never more or less, so it is always going to take this line <span class="arithmatex">\(c_1\)</span> amount of time no matter the input.</li>
+</ul>
+</li>
+<li>Step 2: <span class="arithmatex">\((c_2)(n+1) = c_2n+c_2\)</span><ul>
+<li>So for a size 4 input array: <span class="arithmatex">\(c_2(4) + c_2 = 5c_2\)</span> because the loop will go through each element and then at the end check one more time for the exit condition.</li>
+</ul>
+</li>
+</ul>
+<p>If we wanted to continue this and find the amount of time the entire algorithm takes for an input of size <span class="arithmatex">\(n\)</span>, denoted as <span class="arithmatex">\(T(n)\)</span>, we would just take the sum of each step's time cost and number of times ran. Note, since step 4 has a variable number of times ran, we will calculate its worst-case scenario runtime:</p>
+<ul>
+<li><span class="arithmatex">\(T(n)=c_1(1) + c_2(n+1) + c_3(n) + c_4(n) + c_7(1)\)</span></li>
+</ul>
+<p>After some simplification:</p>
+<ul>
+<li><span class="arithmatex">\(T(n)=c_1 + c_2(n+1) + c_3n + c_4n + c_7\)</span></li>
+<li><span class="arithmatex">\(T(n)=c_1 + c_2n + c_2 + c_3n + c_4n + c_7\)</span></li>
+<li><span class="arithmatex">\(T(n)= (c_2 + c_3 + c_4)n + (c_1 + c_2 + c_7)\)</span></li>
+</ul>
+<p>Here we can see that if we make <span class="arithmatex">\(a = c_2 + c_3 + c_4\)</span> and <span class="arithmatex">\(b=c_1 + c_2 + c_7\)</span>, then we can simplify again to see: <span class="arithmatex">\(T(n)=an+b\)</span>. Since <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span> are sums of constants, they are constants themselves, making the running time able to be expressed using a <strong>linear function</strong> of <span class="arithmatex">\(n\)</span>. </p>
+<p>Linear functions are the basic <span class="arithmatex">\(y=mx+b\)</span> form of functions that describe a constant growth of <span class="arithmatex">\(m\)</span> offset by <span class="arithmatex">\(b\)</span> for a changing value of <span class="arithmatex">\(x\)</span>. We are saying here that as the size of the input, <span class="arithmatex">\(n\)</span>, grows, the runtime of the algorithm grows at a constant rate. Say that the sum of <span class="arithmatex">\(a\)</span> is 4 milliseconds and <span class="arithmatex">\(b\)</span> is 5 milliseconds and we evaluate the worst-case scenario for arrays of sizes 1 - 5:</p>
+<p><img _=";" align="right" alt="" src="../../img/linear_graph.png" width="350" /></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(n\)</span></th>
+<th><span class="arithmatex">\(T(n)=4n+5\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>9</td>
+</tr>
+<tr>
+<td>2</td>
+<td>13</td>
+</tr>
+<tr>
+<td>3</td>
+<td>17</td>
+</tr>
+<tr>
+<td>4</td>
+<td>21</td>
+</tr>
+<tr>
+<td>5</td>
+<td>25</td>
+</tr>
+</tbody>
+</table>
+<p><br><br>
+We can see this constant growth by the addition of 4 at each increment of <span class="arithmatex">\(n\)</span>, as well as by the straight line with a constant slope. Note that this is the worst-case scenario where we assumed that it would take the maximum number of steps possible. If we did the best-case, it would still be a linear line although the slope component <span class="arithmatex">\(a\)</span> would have <span class="arithmatex">\(c_4\)</span> removed, and make it a slightly slower linear growth (meaning it will be faster for all values of <span class="arithmatex">\(n\)</span>). Most of the time we will measure the worst-case of an algorithm, so as to always have a maximum of how long the algorithm could take to run.</p>
+<p>The following is another example of breaking down an algorithm that checks if an array contains any duplicate values. Note this is another messy bit of math, focus less on the specifics of the math and more the intuition that it leads to; <strong>different algorithms have different runtimes as <span class="arithmatex">\(n\)</span> grows</strong>:</p>
+<ul>
+<li><strong>Algorithm: Contains Duplicates</strong><ul>
+<li><strong>Input:</strong> An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([a_0, a_1, ..., a_{n-1}]\)</span></li>
+<li><strong>Output:</strong> <code>true</code> if there are duplicates, <code>false</code> otherwise</li>
+<li><strong>Procedure:</strong></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Step</th>
+<th><span class="arithmatex">\(c_i\)</span></th>
+<th>Number of Times</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(\text{for } i \gets 0 \text{ to } n-1 \text{ do:}\)</span></td>
+<td><span class="arithmatex">\(c_1\)</span></td>
+<td><span class="arithmatex">\(n+1\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td>&emsp;<span class="arithmatex">\(\text{for } j \gets i+1 \text{ to } n-1 \text{ do:}\)</span></td>
+<td><span class="arithmatex">\(c_2\)</span></td>
+<td><span class="arithmatex">\(\sum_{i=0}^{n-1}(n-i)\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td>&emsp;&emsp;<span class="arithmatex">\(\text{if } A[i] = A[j] \text{ then:}\)</span></td>
+<td><span class="arithmatex">\(c_3\)</span></td>
+<td><span class="arithmatex">\(\sum_{i=0}^{n-1}(n-i-1)\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td>&emsp;&emsp;&emsp;<span class="arithmatex">\(\text{return true}\)</span></td>
+<td><span class="arithmatex">\(c_4\)</span></td>
+<td><span class="arithmatex">\([0,1]\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td>&emsp;&emsp;<span class="arithmatex">\(\text{end if}\)</span></td>
+<td>0</td>
+<td>-</td>
+</tr>
+<tr>
+<td>6</td>
+<td>&emsp;<span class="arithmatex">\(\text{end for}\)</span></td>
+<td>0</td>
+<td>-</td>
+</tr>
+<tr>
+<td>7</td>
+<td><span class="arithmatex">\(\text{end for}\)</span></td>
+<td>0</td>
+<td>-</td>
+</tr>
+<tr>
+<td>8</td>
+<td><span class="arithmatex">\(\text{return false}\)</span></td>
+<td><span class="arithmatex">\(c_8\)</span></td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The outer loop runs <span class="arithmatex">\(n\)</span> times (checking the exit condition <span class="arithmatex">\(n+1\)</span> times)</li>
+<li>For each iteration <span class="arithmatex">\(i\)</span> of the outer loop, the inner loop runs <span class="arithmatex">\((n-i-1)\)</span> times</li>
+<li>In the <strong>worst case</strong> (no duplicates found), we check every pair of elements</li>
+</ul>
+<p><strong>Calculating the worst-case runtime:</strong></p>
+<p>For the inner loop iterations across all outer loop iterations (simplifying using arithmetic series math):</p>
+<div class="arithmatex">\[\sum_{i=0}^{n-1}(n-i-1) = (n-1) + (n-2) + (n-3) + ... + 1 + 0 = \frac{n(n-1)}{2}\]</div>
+<p>So our total runtime is after plugging in the previous:</p>
+<div class="arithmatex">\[T(n) = c_1(n+1) + c_2\left(\frac{n(n-1)}{2}\right) + c_3\left(\frac{n(n-1)}{2}\right) + c_8\]</div>
+<p>Simplifying:</p>
+<div class="arithmatex">\[T(n) = c_1n + c_1 + \frac{c_2n^2 - c_2n}{2} + \frac{c_3n^2 - c_3n}{2} + c_8\]</div>
+<div class="arithmatex">\[T(n) = \frac{(c_2+c_3)}{2}n^2 + \left(c_1 - \frac{c_2+c_3}{2}\right)n + (c_1 + c_8)\]</div>
+<p>If we let <span class="arithmatex">\(a = \frac{c_2+c_3}{2}\)</span>, <span class="arithmatex">\(b = c_1 - \frac{c_2+c_3}{2}\)</span>, and <span class="arithmatex">\(c = c_1 + c_8\)</span>, we get:</p>
+<div class="arithmatex">\[T(n) = an^2 + bn + c\]</div>
+<p>This is a <strong>quadratic function</strong>, one that forms a parabola with quadratic growth/decay on the arms. Let's see how this compares to our linear Max-Element algorithm.</p>
+<p>Assuming <span class="arithmatex">\(a = 2\)</span> ms, <span class="arithmatex">\(b = 1\)</span> ms, and <span class="arithmatex">\(c = 3\)</span> ms:</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(n\)</span></th>
+<th>Linear: <span class="arithmatex">\(4n+5\)</span></th>
+<th>Linear Change</th>
+<th>Quadratic: <span class="arithmatex">\(2n^2+n+3\)</span></th>
+<th>Quadratic change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>9</td>
+<td>-</td>
+<td>6</td>
+<td>-</td>
+</tr>
+<tr>
+<td>2</td>
+<td>13</td>
+<td>+4</td>
+<td>13</td>
+<td>+7</td>
+</tr>
+<tr>
+<td>3</td>
+<td>17</td>
+<td>+4</td>
+<td>24</td>
+<td>+11</td>
+</tr>
+<tr>
+<td>4</td>
+<td>21</td>
+<td>+4</td>
+<td>39</td>
+<td>+15</td>
+</tr>
+<tr>
+<td>5</td>
+<td>25</td>
+<td>+4</td>
+<td>58</td>
+<td>+19</td>
+</tr>
+<tr>
+<td>6</td>
+<td>29</td>
+<td>+4</td>
+<td>81</td>
+<td>+23</td>
+</tr>
+<tr>
+<td>7</td>
+<td>33</td>
+<td>+4</td>
+<td>108</td>
+<td>+27</td>
+</tr>
+</tbody>
+</table>
+<p><img _=";" align="left" alt="" src="../../img/quad_graph.png" width="350" /></p>
+<p>Notice that this algorithm has an increasing rate of change that makes it take significantly more time as the size of the input grows. This growth is <strong>quadratic</strong> from the <span class="arithmatex">\(n^2\)</span> part of the time equation, this is called the <strong>dominant component</strong> and is the main contributor to the increasing rate of change and high total runtime the algorithm takes on a given input. If we wanted to understand generally about how an algorithm behaves on increasing input sizes, we could focus on this part and ignore the rest.</p>
+<p><br>
+<br></p>
+<h2 id="growth-of-functions">Growth of Functions</h2>
+<p>In the previous section, we saw how we can examine an algorithm and estimate its runtime generally and machine-independently. After getting the time function, <span class="arithmatex">\(T(n)\)</span>, for two algorithms, we saw that different algorithms take much longer than others as the input grows. In order to get there we had to do some simplifications. </p>
+<p>One was that we abstracted the cost of each line of pseudocode into a single value <span class="arithmatex">\(c_i\)</span>. We then further simplified things down by taking groups of constants operating on one another (the creation of <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span> in the Max Example). This shows that the constants individually can usually be ignored and abstracted into further mathematical constants that can be calculated for each implementation of the algorithm. Components like <span class="arithmatex">\(n\)</span> or <span class="arithmatex">\(n^2\)</span> are the important parts, everything else is machine dependent.</p>
+<p>Continuing that idea, the <strong>dominate components</strong> that dictate how the function grows as <span class="arithmatex">\(n\)</span> increases should be the main focus of the analysis of an algorithm. For example, the linear growth of the Max Algorithm, represented using <span class="arithmatex">\(T(n) = an+b\)</span>, <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span> can be completely ignored until later. It is the <span class="arithmatex">\(n\)</span> part that informs the nature of how the function grows. Take the following graph as an example.</p>
+<p>Here, we have the quadratic growth <span class="arithmatex">\(n^2\)</span> graphed along with various linear functions with different slopes:</p>
+<p><img _=";" alt="" class="center" src="../../img/lin_expo_graph.png" width="500" /></p>
+<p>Because quadratic growth has a ever-increasing rate of change, it will always overtake linear growth for some value of <span class="arithmatex">\(n\)</span>, regardless of what constants are taken in account for the calculation. There are a few main types of growth we will be worrying about in this course:</p>
+<ul>
+<li><strong>Constant Value</strong>: <span class="arithmatex">\(c\)</span><ul>
+<li>There is no growth to the function, it will always output constant <span class="arithmatex">\(c\)</span></li>
+</ul>
+</li>
+<li><strong>Linear Growth</strong> : <span class="arithmatex">\(n\)</span><ul>
+<li>Rate of change is constant</li>
+</ul>
+</li>
+<li><strong>Quadratic Growth</strong> : <span class="arithmatex">\(n^c\)</span><ul>
+<li>Rate of change increases by a constant rate <span class="arithmatex">\(c\)</span></li>
+</ul>
+</li>
+<li><strong>Exponential Growth</strong> : <span class="arithmatex">\(c^n\)</span><ul>
+<li>Rate of change increases by an increasing rate</li>
+</ul>
+</li>
+<li><strong>Logarithmic Growth</strong> : <span class="arithmatex">\(log(n)\)</span><ul>
+<li>Growth is determined by the log function</li>
+</ul>
+</li>
+<li><strong>Log-Linear Growth</strong> : <span class="arithmatex">\(nlog(n)\)</span><ul>
+<li>The result of doing <span class="arithmatex">\(log(n)\)</span>, <span class="arithmatex">\(n\)</span> times. Growth is a mix of linear and logarithmic growth. For small values of <span class="arithmatex">\(n\)</span>, log-linear is faster that linear, but as <span class="arithmatex">\(n\)</span> gets larger it overtakes linear.</li>
+</ul>
+</li>
+</ul>
+<p>Here is a graph with all of them:</p>
+<p><img _=";" alt="" class="center" src="../../img/graph.png" width="650" /></p>
+<p>As you can see the different functions all increase at different rates as <span class="arithmatex">\(n\)</span>, the input size, increases. These represent the growth that any function can take, however, here each represents a function that describes how runtime increases as the size of the input for an algorithm increases. From here we can see that it is not the individual runtimes of instances that matter when assessing an algorithm, <strong>it is the pattern of the growth of runtime as the input size increases.</strong> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "navigation.sections", "navigation.expand"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascript/wcag_fixes.js"></script>
+      
+        <script src="../../javascript/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

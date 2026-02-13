@@ -1,0 +1,1429 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../3_runtime/">
+      
+      
+        <link rel="next" href="../../labs/1_insertion_breakdown/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../img/cs240.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Big O - CS 240 - Data Structures and Algorithms</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#asymptotic-notation-big-o-and-beyond" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="CS 240 - Data Structures and Algorithms" class="md-header__button md-logo" aria-label="CS 240 - Data Structures and Algorithms" data-md-component="logo">
+      
+  <img src="../../img/cs240.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CS 240 - Data Structures and Algorithms
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Big O
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0 9.821 9.821 0 0 0-17.64 0"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../syllabus/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Syllabus
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../schedule/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Schedule
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../glossary/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Glossary
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../1_introduction/" class="md-tabs__link">
+          
+  
+  
+  Lessons
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../labs/1_insertion_breakdown/" class="md-tabs__link">
+          
+  
+  
+  Labs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../homework/how_to_hand_in/" class="md-tabs__link">
+          
+  
+  
+  Homework
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="CS 240 - Data Structures and Algorithms" class="md-nav__button md-logo" aria-label="CS 240 - Data Structures and Algorithms" data-md-component="logo">
+      
+  <img src="../../img/cs240.png" alt="logo">
+
+    </a>
+    CS 240 - Data Structures and Algorithms
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../syllabus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syllabus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schedule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schedule
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lessons
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lessons
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_reviewing_c/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reviewing C
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Runtime Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Big O
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Big O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#asymptotic-notation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Asymptotic Notation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Asymptotic Notation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#big-theta-notation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Big Theta Notation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#big-omega-notation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Big Omega Notation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#big-o-notation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Big O Notation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Time Complexity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-my-gosh-so-complex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "O" My Gosh... So "Complex"...
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="&#34;O&#34; My Gosh... So &#34;Complex&#34;...">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-algorithm-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Algorithm Assessment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finding-dominant-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finding Dominant Components
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Finding Dominant Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1-linear-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 1: Linear Search
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-check-for-duplicates-naive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 2: Check for Duplicates (Naive)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../labs/1_insertion_breakdown/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Labs
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../homework/how_to_hand_in/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Homework
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#asymptotic-notation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Asymptotic Notation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Asymptotic Notation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#big-theta-notation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Big Theta Notation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#big-omega-notation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Big Omega Notation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#big-o-notation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Big O Notation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Time Complexity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-my-gosh-so-complex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "O" My Gosh... So "Complex"...
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="&#34;O&#34; My Gosh... So &#34;Complex&#34;...">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-algorithm-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Algorithm Assessment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finding-dominant-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finding Dominant Components
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Finding Dominant Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1-linear-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 1: Linear Search
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-check-for-duplicates-naive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 2: Check for Duplicates (Naive)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../1_introduction/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Lessons
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="asymptotic-notation-big-o-and-beyond">Asymptotic Notation: Big O and Beyond</h1>
+<p>You've learned how to measure algorithm runtime by constructing T(n) functions and identifying dominant components. But writing out the full derivations every time is impractical. We need shorthand.</p>
+<p><strong>Asymptotic notation</strong> is the language computer scientists use to describe algorithm efficiency in a short way. It ignores the constants from before and focuses on the dominant components to explain an algorithms behavior and how it scales to larger inputs.</p>
+<p>The three most important asymptotic notations are:</p>
+<ul>
+<li><strong>Big O (O)</strong> - Upper bound (worst-case): "It will never be slower than this"</li>
+<li><strong>Big Omega (Ω)</strong> - Lower bound (best-case): "It can't be faster than this"</li>
+<li><strong>Big Theta (Θ)</strong> - Tight bound (average-case): "It grows exactly like this"</li>
+</ul>
+<p>This lesson covers how to:</p>
+<ul>
+<li>Express algorithm runtime using Big O, Omega, and Theta notation</li>
+<li>Analyze both best-case and worst-case scenarios for the same algorithm</li>
+<li>Quickly compare algorithms by their complexity classes</li>
+<li>Find dominant components in code without exhaustive mathematical analysis</li>
+<li>Understand why a "slower-looking" O(n log n) algorithm often beats a "simple" O(n²) one</li>
+</ul>
+<h2 id="asymptotic-notation">Asymptotic Notation</h2>
+<p>From the <a href="../3_runtime/">last lesson</a> , we now see that:</p>
+<ul>
+<li>Algorithms take a certain number of discrete steps for a given problem instance</li>
+<li>Those steps take some amount of time when implemented on hardware</li>
+<li>The total number of steps is ultimately decided by the input size <span class="arithmatex">\(n\)</span></li>
+<li>We can estimate the runtime of an algorithm by constructing a <span class="arithmatex">\(T(n)\)</span> function in terms of its input size, <span class="arithmatex">\(n\)</span>, and how many times each step is ran based on <span class="arithmatex">\(n\)</span>. We then multiply each step by hypothetical constants, <span class="arithmatex">\(c_i\)</span>, corresponding to algorithm step <span class="arithmatex">\(i\)</span>.</li>
+<li>Some algorithms runtimes grow faster than others, and this is largely decided by the equations that use <span class="arithmatex">\(n\)</span>, called the <strong>dominant component</strong> and it dictates an algorithms <strong>rate of growth</strong></li>
+</ul>
+<p>This <strong>dominant component</strong> and <strong>rate of growth</strong> is what really matters. In the "Growth of Functions" section, we saw that no matter what constant values a linear growth function has, it will always result in a lower rate of growth than a quadratic function. For this reason, we can ignore constants for the most part and measure an algorithms run time as the dominant component:</p>
+<ul>
+<li>Max Algorithm: <ul>
+<li><span class="arithmatex">\(T(n)= (c_2 + c_3 + c_4)n + (c_1 + c_2 + c_7) \approx n\)</span></li>
+</ul>
+</li>
+<li>Find Duplicates Algorithm: <ul>
+<li><span class="arithmatex">\(T(n) = \frac{(c_2+c_3)}{2}n^2 + \left(c_1 - \frac{c_2+c_3}{2}\right)n + (c_1 + c_8) \approx n^2\)</span></li>
+</ul>
+</li>
+<li>Both in terms of rate of growth of run time</li>
+</ul>
+<p>This is called <strong>asymptotic notation</strong> and it refers to the discarding of lower order terms (lower rate of growth terms) and constants. We use it in reference to runtimes to calculate an algorithms <strong>time complexity</strong>, or how the algorithm's runtime increases as the input size grows under various conditions. </p>
+<p>Recall that, when we constructed <span class="arithmatex">\(T(n)\)</span>, the runtime function of an algorithm, there was a mention of a <strong>worst-case</strong> and <strong>best-case</strong> runtime when calculating an indeterminant number of steps depending on the contents of the input rather than its size. </p>
+<p>Worst-case refers to the maximum number of steps an algorithm could take if the input was the hardest it could be to solve. For the Max Algorithm, if the input was sorted least-greatest, line 4 would get ran <span class="arithmatex">\(n\)</span> times, where as if the max value was in the beginning, line 4 would never be ran.  This latter situation is the <strong>best-case scenario</strong>, where every line takes the least number of steps possible. Another example of this would be the Sorting Problem, any sorting problem's best-case scenario is an input that is fully sorted. There is also <strong>average-case</strong> where an average input in size and difficulty is assumed or calculated and that is used to find the average running time of an algorithm.</p>
+<p>Each one of these is useful for understanding and assessing algorithms. Especially when you consider the fact that dominant components may be different for worst, best, and average cases. This means we have three options to assess an algorithm, and, as a result, three types of <strong>asymptotic notation</strong>:</p>
+<ul>
+<li><span class="arithmatex">\(\Theta (g(n))\)</span> - <strong>"Big Theta" Notation</strong></li>
+<li><span class="arithmatex">\(\Omega (g(n))\)</span> - <strong>"Big Omega" Notation</strong></li>
+<li><span class="arithmatex">\(O(g(n))\)</span> - <strong>"Big O" Notation</strong></li>
+</ul>
+<h3 id="big-theta-notation">Big Theta Notation</h3>
+<p><span class="arithmatex">\(\Theta (g(n))\)</span> - <strong>"Big Theta" Notation</strong></p>
+<p>For a given function <span class="arithmatex">\(g(n)\)</span>, we denote by <span class="arithmatex">\(\Theta (g(n))\)</span> the <em>set of functions</em></p>
+<div class="arithmatex">\[\begin{gather}\Theta (g(n)) = \{f(n): \text{there exist positive constants } c_1, c_2, \text{and } n_0 \text{ such that}\\
+0 \leq c_1 g(n) \leq f(n) \leq c_2g(n) \text{ for all } n \geq n_0 \}\end{gather}\]</div>
+<ul>
+<li><strong>This means the function grows at <em>exactly</em> this <span class="arithmatex">\(g(n)\)</span></strong> - it's sandwiched between the upper and lower bound of constants for all values of <span class="arithmatex">\(n\)</span> starting at some <span class="arithmatex">\(n_0\)</span> </li>
+<li>We use Big Theta when we can describe the <strong>average-case</strong> or when the worst and best cases are the same of an algorithm</li>
+<li>Example: The Max Algorithm is  <span class="arithmatex">\(\Theta (n)\)</span> because it always does roughly <span class="arithmatex">\(n\)</span> comparisons regardless of the input</li>
+</ul>
+<p>Big Theta is used to show an algorithms average-case or true runtime growth. If an algorithm's "average input" can be assumed or derived probabilistic analysis of the algorithm over many different inputs could be used to find its average-case. Most of the time, the average-case is found through experimentation or assumed through rough estimates. Otherwise we use Big Theta when the upper and lower limit of growth is the same.</p>
+<hr />
+<h3 id="big-omega-notation">Big Omega Notation</h3>
+<p><span class="arithmatex">\(\Omega (g(n))\)</span> - <strong>"Big Omega" Notation</strong></p>
+<p>For a given function <span class="arithmatex">\(g(n)\)</span>, we denote by <span class="arithmatex">\(\Omega (g(n))\)</span> the <em>set of functions</em></p>
+<div class="arithmatex">\[\begin{gather}\Omega (g(n)) = \{f(n): \text{there exist positive constants } c \text{ and } n_0 \text{ such that}\\
+0 \leq c g(n) \leq f(n) \text{ for all } n \geq n_0 \}\end{gather}\]</div>
+<ul>
+<li><strong>This means the function grows at least at a rate of <span class="arithmatex">\(g(n)\)</span></strong>, but it can be higher than this lower bound</li>
+<li>We use Big Omega when we can describe the <strong>best-case</strong> of an algorithm and know that the runtime function cannot grow slower than <span class="arithmatex">\(g(n)\)</span> </li>
+</ul>
+<p>Big Omega notation is the <strong>asymptotic lower bound</strong> and describes the best-case running time of an algorithm. What ever function of growth <span class="arithmatex">\(g(n)\)</span> has, it represents the runtime growth of an algorithm as the ideal input grows. It represented the fastest an algorithm can go, given an input that results in the fewest steps where there are varying numbers of them. </p>
+<hr />
+<h3 id="big-o-notation"><strong>Big O Notation</strong></h3>
+<p><span class="arithmatex">\(O(g(n))\)</span> - <strong>"Big O" Notation</strong></p>
+<p>For a given function <span class="arithmatex">\(g(n)\)</span>, we denote by <span class="arithmatex">\(O (g(n))\)</span> the <em>set of functions</em></p>
+<div class="arithmatex">\[\begin{gather}O (g(n)) = \{f(n): \text{there exist positive constants } c \text{ and } n_0 \text{ such that}\\
+0  \leq f(n) \leq c g(n) \text{ for all } n \geq n_0 \}\end{gather}\]</div>
+<ul>
+<li><strong>This means the function grows at most at a rate of <span class="arithmatex">\(g(n)\)</span></strong>, but it can be lower than this upper bound</li>
+<li>We use Big O when we want to describe the <strong>worst-case</strong> of an algorithm and know that the runtime function will be at worst growing at rate <span class="arithmatex">\(g(n)\)</span></li>
+<li>We are usually going to talk about this one since the worst-case is usually the most important to work around in critical places</li>
+</ul>
+<p>Big O Notation is the most used notation as it is used to describe the worst-case running time growth. This represents the <strong>asymptotic upper bound</strong> and defines the upper limit of growth in the runtime of an algorithm. It assumes inputs that cause the maximum number of steps and represents the worst possible performance of the algorithm as input grows. As such, it is the most useful of the three, since we often need to plan around the worst case scenario in safety critical environments. </p>
+<hr />
+<h2 id="time-complexity">Time Complexity</h2>
+<p>These various notations allow us to describe the behavior of an algorithm's runtime as the size of the input grows, this is known as the <strong>time complexity</strong> of the algorithm, and we use the three methods above to describe the general growth of the runtime function <span class="arithmatex">\(T(n)\)</span> under different conditions. We will, for the most part, focus on using asymptotic notation to describe how runtime grows, however we can use it to describe the growth of any function. The other resource we will want to describe using this method is the amount of memory an algorithm requires. This <strong>space complexity</strong>, will be highlighted another day, but know that we can use this notation for other things.</p>
+<p>To show the full break down of an algorithm, read through <a href="../../labs/1_insertion_breakdown/">this lab</a> that shows the process of estimating a runtime function, discarding constants, and extracting dominant components to generate the various time complexity metrics for Insertion Sort.</p>
+<h2 id="o-my-gosh-so-complex">"O" My Gosh... So "Complex"...</h2>
+<p>This may have been a bit jarring with the math and the notation if you are not used to it. While these ideas were sprung from years of complex mathematical theory, we do not need to focus on it in this class. This is merely an introduction to algorithmic analysis and to familiarize oneself with the various ways we would assess an algorithm, complex as a task as it may seem.</p>
+<p>One of the consequences of going down the path of mathematical theory is a loss of practical use. To ensure our perspective remains properly oriented, it would be best to review these various ideas and connect them to things we can use in our coding.</p>
+<h3 id="quick-algorithm-assessment">Quick Algorithm Assessment</h3>
+<p>Because computer science has matured as much as it has, many times when we approach a problem there will already be a suite of solutions available to choose from, each with their complexity listed out beforehand. One such problem that will reoccur in this course is the Sorting Problem. We will cover the Sorting Problem and all of these algorithms in depth another day, but let's put our newly found knowledge to use. </p>
+<table>
+<thead>
+<tr>
+<th><strong>Algorithm</strong></th>
+<th><strong>Best Case</strong></th>
+<th><strong>Average Case</strong></th>
+<th><strong>Worst Case</strong></th>
+<th><strong>Space Complexit</strong>y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bubble Sort</td>
+<td><span class="arithmatex">\(\Omega(n)\)</span></td>
+<td><span class="arithmatex">\(\Theta(n²)\)</span></td>
+<td><span class="arithmatex">\(O(n²)\)</span></td>
+<td><span class="arithmatex">\(\Theta(1)\)</span></td>
+</tr>
+<tr>
+<td>Selection Sort</td>
+<td><span class="arithmatex">\(\Omega(n²)\)</span></td>
+<td><span class="arithmatex">\(\Theta(n²)\)</span></td>
+<td><span class="arithmatex">\(O(n²)\)</span></td>
+<td><span class="arithmatex">\(\Theta(1)\)</span></td>
+</tr>
+<tr>
+<td>Insertion Sort</td>
+<td><span class="arithmatex">\(\Omega(n)\)</span></td>
+<td><span class="arithmatex">\(\Theta(n²)\)</span></td>
+<td><span class="arithmatex">\(O(n²)\)</span></td>
+<td><span class="arithmatex">\(\Theta(1)\)</span></td>
+</tr>
+<tr>
+<td>Merge Sort</td>
+<td><span class="arithmatex">\(\Omega(n log n)\)</span></td>
+<td><span class="arithmatex">\(\Theta(n log n)\)</span></td>
+<td><span class="arithmatex">\(O(n log n)\)</span></td>
+<td><span class="arithmatex">\(O(n)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>To aid in this quick assessment, it will help to bring in the graph from the Runtime Lesson:</p>
+<p><img _=";" alt="" class="center" src="../../img/graph.png" width="650" /></p>
+<p>Looking at this graph and the table above, it makes the comparison of algorithms much easier. See if you come up with the same following conclusions based on the graph:</p>
+<ul>
+<li><strong>On average AND in the worst-case</strong>, Merge Sort will beat the others as <span class="arithmatex">\(n\)</span> grows to be very large</li>
+<li>In the <strong>best-case</strong>, Insertion and Bubble are the best, showing they work best on almost sorted lists. Contrary to this Selection Sort remains quadratic, even with mostly sorted sequences.</li>
+<li>Even though Merge is the fastest computationally, it requires a linear growth of memory space, something that all the other sorts only need 1 of</li>
+</ul>
+<p>For quick assessments of algorithms bring up their graphs and compare their time-complexities visually. For most problems you should:</p>
+<ol>
+<li>Look for the worst-case time complexities (Big O)</li>
+<li>Compare them by graphing</li>
+<li>Pick the one that grows the slowest as it moves to the right</li>
+</ol>
+<h3 id="finding-dominant-components">Finding Dominant Components</h3>
+<p>The full breakdowns of finding <span class="arithmatex">\(T(n)\)</span> and then stripping away the constants and lower order growth factors can be tedious and time consuming if it has not been done for you, or if you are the one creating the algorithm. When analyzing an algorithm's time complexity, you don't need to count every single operation. Instead, look for the <strong>dominant component</strong>, the part that grows the fastest as input size increases. Here are some quick patterns to recognize:</p>
+<ul>
+<li><strong>Single loop through n items?</strong> -&gt;<span class="arithmatex">\(O(n)\)</span></li>
+<li><strong>Nested loops through n items?</strong> -&gt; <span class="arithmatex">\(O(n²)\)</span></li>
+<li><strong>Dividing problem in half repeatedly?</strong> -&gt; <span class="arithmatex">\(O(log n)\)</span></li>
+<li><strong>Loop that does log n iterations, each doing n work?</strong> -&gt; <span class="arithmatex">\(O(n log n)\)</span></li>
+<li><strong>No loops, just a few operations?</strong> -&gt; <span class="arithmatex">\(O(1)\)</span></li>
+</ul>
+<h4 id="example-1-linear-search">Example 1: Linear Search</h4>
+<ul>
+<li><strong>Algorithm</strong>: Linear Search<ul>
+<li><strong>Inputs</strong>: An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([a_0, a_1, ..., a_{n-1}]\)</span>, and a target value <span class="arithmatex">\(target\)</span></li>
+<li><strong>Output</strong>: Index of <span class="arithmatex">\(target\)</span> in <span class="arithmatex">\(A\)</span>, or <span class="arithmatex">\(-1\)</span> if not found</li>
+<li><strong>Procedure</strong>:<ol>
+<li><span class="arithmatex">\(\text{for } i \gets 0 \text{ to } n-1 \text{ do:}\)</span><ol>
+<li><span class="arithmatex">\(\text{if } A[i] = target \text{ then:}\)</span><ol>
+<li><span class="arithmatex">\(\text{return } i\)</span></li>
+</ol>
+</li>
+<li><span class="arithmatex">\(\text{end if}\)</span></li>
+</ol>
+</li>
+<li><span class="arithmatex">\(\text{end for}\)</span></li>
+<li><span class="arithmatex">\(\text{return } -1\)</span></li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Dominant Component</strong>: The single loop that potentially visits all <span class="arithmatex">\(n\)</span> elements once.<br />
+<strong>Time Complexity</strong>: <span class="arithmatex">\(O(n)\)</span></p>
+<h4 id="example-2-check-for-duplicates-naive">Example 2: Check for Duplicates (Naive)</h4>
+<ul>
+<li><strong>Algorithm</strong>: Has Duplicates<ul>
+<li><strong>Inputs</strong>: An array <span class="arithmatex">\(A\)</span> of <span class="arithmatex">\(n\)</span> numbers <span class="arithmatex">\([a_0, a_1, ..., a_{n-1}]\)</span></li>
+<li><strong>Output</strong>: <span class="arithmatex">\(true\)</span> if any duplicates exist, <span class="arithmatex">\(false\)</span> otherwise</li>
+<li><strong>Procedure</strong>:<ol>
+<li><span class="arithmatex">\(\text{for } i \gets 0 \text{ to } n-1 \text{ do:}\)</span><ol>
+<li><span class="arithmatex">\(\text{for } j \gets i+1 \text{ to } n-1 \text{ do:}\)</span><ol>
+<li><span class="arithmatex">\(\text{if } A[i] = A[j] \text{ then:}\)</span><ol>
+<li><span class="arithmatex">\(\text{return } true\)</span></li>
+</ol>
+</li>
+<li><span class="arithmatex">\(\text{end if}\)</span></li>
+</ol>
+</li>
+<li><span class="arithmatex">\(\text{end for}\)</span></li>
+</ol>
+</li>
+<li><span class="arithmatex">\(\text{end for}\)</span></li>
+<li><span class="arithmatex">\(\text{return } false\)</span></li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Dominant Component</strong>: The nested loops where the outer loop runs <span class="arithmatex">\(n\)</span> times and the inner loop runs up to <span class="arithmatex">\(n\)</span> times for each iteration.<br />
+<strong>Time Complexity</strong>: <span class="arithmatex">\(O(n²)\)</span></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "navigation.sections", "navigation.expand"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascript/wcag_fixes.js"></script>
+      
+        <script src="../../javascript/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
