@@ -55,9 +55,12 @@ nav:
   - Lessons:
     - Introduction: lessons/1_introduction.md
     - Reviewing C: lessons/2_reviewing_c.md
-    - Big O: lessons/3_algo_big_o.md
+    - Runtime Basics: lessons/3_runtime.md
+    - Big O: lessons/4_big_o.md
   - Labs:
-    - Lab: labs/lab.md
+    - Lab 1: labs/1_insertion_breakdown.md
+    - Lab 2: labs/2_array_lab.md
+
   - Homework:
     - How To Hand In: homework/how_to_hand_in.md
     - Installing Software: homework/gcc_install.md

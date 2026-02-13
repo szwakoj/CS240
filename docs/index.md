@@ -10,7 +10,7 @@ This site serves as the main entry point for the course and will be the means of
  - [Schedule](schedule.md) - Course schedule; use primarily as a history of topics, launching point, and 1-2 week look ahead
  - [Lessons](lessons/1_introduction.md) - The main repository of course material, all lectures are based on these
  - [Homeworks](homework/how_to_hand_in.md) - This link takes you to the details of how to hand in homework, as well as all currently given assignments
- - [Labs](labs/c_compilation.md) - The course's guided labs, optional and initiated in-person, with students finishing at home
+ - [Labs](labs/1_insertion_breakdown.md) - The course's guided labs, optional and initiated in-person, with students finishing at home
 
  
 **Note on Accessibility**

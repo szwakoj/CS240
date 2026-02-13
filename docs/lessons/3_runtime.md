@@ -1,14 +1,16 @@
-# Algorithms and Big O
+# Runtime Analysis Fundamentals
 
-Knowing that algorithms solve problems might be a common sense statement to make. However, what happens when we have two algorithms that appear to solve the same computational problem? Which do we choose? How do we compare them? 
+Why do some programs feel fast while others make us want to throw our computers out the window? Why does sorting 100 items take milliseconds but sorting 100,000 items takes minutes? The answer lies in understanding how algorithms scale.
 
-These are all of the concerns answered by Big O Notation, the measure of how much time it takes for an algorithm to run, given the input size. Here, we will:
+In this lesson, we'll develop a mathematical framework for measuring runtime that works regardless of what computer you're using or what programming language you choose.
 
-- Gain the intuition of Big O Notation
-- See common patterns of growth
-- Compare two algorithms
-- and measure time complexity
+This lesson covers how to:
 
+- Explain why we can't just time algorithms to compare them
+- Construct a runtime function T(n) for simple algorithms
+- Identify the dominant components that drive runtime growth
+- Recognize common patterns of growth (linear, quadratic, logarithmic, etc.)
+- Predict which of two algorithms will be faster for large inputs
 ## Algorithms
 
 To review briefly:
@@ -30,7 +32,7 @@ In the same light, we assess the programs we use in these terms too. If a progra
 
 ### Input Size
 
-This this in mind, how do we measure the time an algorithm takes or how much memory it takes up? To begin to tackle this, we should identify that the size of the input matters a lot for both of these metrics.
+With this in mind, how do we measure the time an algorithm takes or how much memory it takes up? To begin to tackle this, we should identify that the size of the input matters a lot for both of these metrics.
 
 **Input size** depends on the problem being solved. For the problems we covered before like search, finding a max, or sorting, the input size is the amount of items in the input array/list. Take the finding max example from before:
 
@@ -135,21 +137,21 @@ We can see this constant growth by the addition of 4 at each increment of $n$, a
 
 The following is another example of breaking down an algorithm that checks if an array contains any duplicate values. Note this is another messy bit of math, focus less on the specifics of the math and more the intuition that it leads to; **different algorithms have different runtimes as $n$ grows**:
 
-**Algorithm: Contains Duplicates**
-- **Input:** An array $A$ of $n$ numbers $[a_0, a_1, ..., a_{n-1}]$
-- **Output:** `true` if there are duplicates, `false` otherwise
-- **Procedure:**
+- **Algorithm: Contains Duplicates**
+	- **Input:** An array $A$ of $n$ numbers $[a_0, a_1, ..., a_{n-1}]$
+	- **Output:** `true` if there are duplicates, `false` otherwise
+	- **Procedure:**
 
-| No. | Step                                                  | $c_i$ | Number of Times |
-| --- | ----------------------------------------------------- | ----- | --------------- |
-| 1   | $\text{for } i \gets 0 \text{ to } n-1 \text{ do:}$   | $c_1$ | $n+1$           |
-| 2   | &emsp;$\text{for } j \gets i+1 \text{ to } n-1 \text{ do:}$ | $c_2$ | $\sum_{i=0}^{n-1}(n-i)$ |
-| 3   | &emsp;&emsp;$\text{if } A[i] = A[j] \text{ then:}$    | $c_3$ | $\sum_{i=0}^{n-1}(n-i-1)$ |
-| 4   | &emsp;&emsp;&emsp;$\text{return true}$                | $c_4$ | $[0,1]$         |
-| 5   | &emsp;&emsp;$\text{end if}$                           | 0     | -               |
-| 6   | &emsp;$\text{end for}$                                | 0     | -               |
-| 7   | $\text{end for}$                                      | 0     | -               |
-| 8   | $\text{return false}$                                 | $c_8$ | 1               |
+| No. | Step                                                        | $c_i$ | Number of Times           |
+| --- | ----------------------------------------------------------- | ----- | ------------------------- |
+| 1   | $\text{for } i \gets 0 \text{ to } n-1 \text{ do:}$         | $c_1$ | $n+1$                     |
+| 2   | &emsp;$\text{for } j \gets i+1 \text{ to } n-1 \text{ do:}$ | $c_2$ | $\sum_{i=0}^{n-1}(n-i)$   |
+| 3   | &emsp;&emsp;$\text{if } A[i] = A[j] \text{ then:}$          | $c_3$ | $\sum_{i=0}^{n-1}(n-i-1)$ |
+| 4   | &emsp;&emsp;&emsp;$\text{return true}$                      | $c_4$ | $[0,1]$                   |
+| 5   | &emsp;&emsp;$\text{end if}$                                 | 0     | -                         |
+| 6   | &emsp;$\text{end for}$                                      | 0     | -                         |
+| 7   | $\text{end for}$                                            | 0     | -                         |
+| 8   | $\text{return false}$                                       | $c_8$ | 1                         |
 
 - The outer loop runs $n$ times (checking the exit condition $n+1$ times)
 - For each iteration $i$ of the outer loop, the inner loop runs $(n-i-1)$ times
@@ -158,15 +160,20 @@ The following is another example of breaking down an algorithm that checks if an
 **Calculating the worst-case runtime:**
 
 For the inner loop iterations across all outer loop iterations (simplifying using arithmetic series math):
+
 $$\sum_{i=0}^{n-1}(n-i-1) = (n-1) + (n-2) + (n-3) + ... + 1 + 0 = \frac{n(n-1)}{2}$$
 
 So our total runtime is after plugging in the previous:
+
 $$T(n) = c_1(n+1) + c_2\left(\frac{n(n-1)}{2}\right) + c_3\left(\frac{n(n-1)}{2}\right) + c_8$$
 
 Simplifying:
+
 $$T(n) = c_1n + c_1 + \frac{c_2n^2 - c_2n}{2} + \frac{c_3n^2 - c_3n}{2} + c_8$$
 
+
 $$T(n) = \frac{(c_2+c_3)}{2}n^2 + \left(c_1 - \frac{c_2+c_3}{2}\right)n + (c_1 + c_8)$$
+
 
 If we let $a = \frac{c_2+c_3}{2}$, $b = c_1 - \frac{c_2+c_3}{2}$, and $c = c_1 + c_8$, we get:
 
@@ -209,6 +216,7 @@ Here, we have the quadratic growth $n^2$ graphed along with various linear funct
 ![](../img/lin_expo_graph.png){width="500"; .center}
 
 Because quadratic growth has a ever-increasing rate of change, it will always overtake linear growth for some value of $n$, regardless of what constants are taken in account for the calculation. There are a few main types of growth we will be worrying about in this course:
+
 - **Constant Value**: $c$
 	- There is no growth to the function, it will always output constant $c$
 - **Linear Growth** : $n$
@@ -223,8 +231,8 @@ Because quadratic growth has a ever-increasing rate of change, it will always ov
 	- The result of doing $log(n)$, $n$ times. Growth is a mix of linear and logarithmic growth. For small values of $n$, log-linear is faster that linear, but as $n$ gets larger it overtakes linear.
 
 Here is a graph with all of them:
-- Constant - Blue
-- 
 
-## Big O Notation
+![](../img/graph.png){width="650"; .center}
+
+As you can see the different functions all increase at different rates as $n$, the input size, increases. These represent the growth that any function can take, however, here each represents a function that describes how runtime increases as the size of the input for an algorithm increases. From here we can see that it is not the individual runtimes of instances that matter when assessing an algorithm, **it is the pattern of the growth of runtime as the input size increases.** 
 
