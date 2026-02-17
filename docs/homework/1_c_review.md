@@ -137,14 +137,7 @@ void load_connections(Room* rooms, const char* filename) {
 }
 ```
 
-**Hint:** Consider creating a helper function to convert direction characters to array indices:
 
-```c
-int get_direction_index(char dir) {
-    // Returns 0 for North, 1 for South, 2 for East, 3 for West
-    // Returns -1 for invalid direction
-}
-```
 ### Task 4: Implement Game Loop with Movement (30 points)
 
 Create a game loop that:
