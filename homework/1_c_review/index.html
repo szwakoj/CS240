@@ -1545,12 +1545,6 @@ This means:</p>
 </span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="n">fclose</span><span class="p">(</span><span class="n">conn_file</span><span class="p">);</span>
 </span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="p">}</span>
 </span></code></pre></div>
-<p><strong>Hint:</strong> Consider creating a helper function to convert direction characters to array indices:</p>
-<div class="language-c highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">get_direction_index</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">dir</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="c1">// Returns 0 for North, 1 for South, 2 for East, 3 for West</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="c1">// Returns -1 for invalid direction</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">}</span>
-</span></code></pre></div>
 <h3 id="task-4-implement-game-loop-with-movement-30-points">Task 4: Implement Game Loop with Movement (30 points)</h3>
 <p>Create a game loop that:</p>
 <ol>
@@ -1636,11 +1630,11 @@ This means:</p>
 </ul>
 <p><strong>Deliverable</strong>: A walkthrough text file (<code>walkthrough.txt</code>) showing the exact commands to reach the exit from the start.</p>
 <p>Example:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>go north
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>go east
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>look
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>go south
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>go west
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>go north
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>go east
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>look
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>go south
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>go west
 </span></code></pre></div>
 <h3 id="task-4-reflection-questions-30-points">Task 4: Reflection Questions (30 points)</h3>
 <p>Answer the following questions in a file called <code>reflection.txt</code>. Each answer should be 2-4 sentences.</p>
