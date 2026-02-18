@@ -1,5 +1,5 @@
 # C Review: Text Adventure Game
-## Due Date: 2/20/26
+## Due Date: 2/27/26
 
 ## Description:
 In this homework, you will construct a text adventure game in the style of classics like [Zork](https://en.wikipedia.org/wiki/Zork), [The Hobbit](https://en.wikipedia.org/wiki/The_Hobbit_(1982_video_game)), and [The Hitchhiker's Guide to the Galaxy](https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy_(video_game)) but simplified to a manageable scope. You are to create a text adventure in the command-line using the C programming language and rooms that I provide in the form of text files. You will be implementing the data structures and algorithms to facilitate the gameplay and read in arbitrary room files.
