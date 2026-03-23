@@ -8,6 +8,7 @@ structure: the record. Later lessons will build on this foundation to cover
 linear and non-linear data structures and their implementations.
 
 In this lesson:
+
 - Primitives vs Data Structures
 - Homogeneous vs Heterogeneous Structures
 - Records

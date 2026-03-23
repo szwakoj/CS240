@@ -3,6 +3,7 @@
 Continuing after the previous lesson on classifying algorithms into linear and non-linear characteristics, we will cover the main linear structures outside of arrays and the dynamic counterpart. Stacks and queues are special cases of arrays, while linked lists are a different solution to having a dynamically resizable linear collection.
 
   In this lesson, we will cover:
+  
 - Stacks and Queues
 - Linked Lists
 - Doubly Linked Lists
