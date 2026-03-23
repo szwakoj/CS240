@@ -57,6 +57,9 @@ nav:
     - Reviewing C: lessons/2_reviewing_c.md
     - Runtime Basics: lessons/3_runtime.md
     - Big O: lessons/4_big_o.md
+    - Basic DS: lessons/5_data_structs1.md
+    - DS - Linear I: lessons/6_data_structs2.md
+    - DS - Linear II: lessons/7_data_structs3.md
   - Labs:
     - Lab 1: labs/1_insertion_breakdown.md
     - Lab 2: labs/2_array_lab.md
@@ -66,3 +69,4 @@ nav:
     - Installing Software: homework/gcc_install.md
     - Homework 1 (Due 2/27/26): homework/1_c_review.md
     - Homework 2 (Due 3/13/26): homework/2_test_review.md
+    - Homework 3 (Due 4/5/26): homework/3_dynamic_stocks.md
