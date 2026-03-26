@@ -51,7 +51,7 @@ test_stock_array
 > ./bin/stock
 ```
 
-Download the starting point here. You will only write code in `src/stock_array.c`. Everything else is provided.
+Download the starting point [here](../homework/HW3_start.zip). You will only write code in `src/stock_array.c` and `src/main.c`. Everything else is provided.
 
 ---
 ###  Provided Test
