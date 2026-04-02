@@ -15,7 +15,7 @@ This assignment builds directly on the two lessons covering [records](../lessons
 ### Project Structure
 
 ```
-CS220-HW2-LastName/
+CS220-HW3-LastName/
 ├── bin/                # Target directory for compilation
 │   ├── stock
 │   └── test_stock_array
