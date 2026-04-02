@@ -1,6 +1,6 @@
 # Stock Price Analyzer: Dynamic Arrays and Records
 
-## Due Date: 4/5/26
+## Due Date: 4/7/26
 
 ## Description
 
