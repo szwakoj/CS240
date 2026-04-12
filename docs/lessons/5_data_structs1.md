@@ -147,7 +147,7 @@ char str2[32] = "String 2 is over here";
 strcpy(str1, str2);
 ```
 
-This is called **shallow copying** — copying the reference rather than the data it points to. This extents to `struct`'s meaning we need to copy array and string fields element by element using loops or `strcpy()` each time or through a function:
+This is called **shallow copying** - copying the reference rather than the data it points to. This extents to `struct`'s meaning we need to copy array and string fields element by element using loops or `strcpy()` each time or through a function:
 
 ```C
 // Stock struct, stores ticker and last week of prices
@@ -171,6 +171,6 @@ void stock_copy(Stock* dest, Stock* src)
 
 Records do not have other operations on them generally, other than maybe a print or output operation. This makes them a structure that is used by other data structures that allow for further collection of multiple records.  
 
-Records on their own are not particularly powerful — their value comes from being the atom that larger structures are built from. A linked list is a chain of records. A queue is a managed collection of records. A hash table is an array of records. Understanding what a record is and how C represents it in memory is the foundation for everything that follows.
+Records on their own are not particularly powerful - their value comes from being the atom that larger structures are built from. A linked list is a chain of records. A queue is a managed collection of records. A hash table is an array of records. Understanding what a record is and how C represents it in memory is the foundation for everything that follows.
 
-The next lesson introduces **linear data structures** — structures where elements have a defined sequential order. We will look at what makes a structure linear, contrast it with non-linear structures, and then dig into the most fundamental linear structure you will use: the array.
+The next lesson introduces **linear data structures** - structures where elements have a defined sequential order. We will look at what makes a structure linear, contrast it with non-linear structures, and then dig into the most fundamental linear structure you will use: the array.
