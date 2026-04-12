@@ -1,6 +1,6 @@
 # Stock Price Analyzer: Dynamic Arrays and Records
 
-## Due Date: 4/5/26
+## Due Date: 4/7/26
 
 ## Description
 
@@ -15,7 +15,7 @@ This assignment builds directly on the two lessons covering [records](../lessons
 ### Project Structure
 
 ```
-CS220-HW2-LastName/
+CS220-HW3-LastName/
 ├── bin/                # Target directory for compilation
 │   ├── stock
 │   └── test_stock_array
@@ -51,7 +51,7 @@ test_stock_array
 > ./bin/stock
 ```
 
-Download the starting point here. You will only write code in `src/stock_array.c`. Everything else is provided.
+Download the starting point [here](../homework/HW3_start.zip). You will only write code in `src/stock_array.c` and `src/main.c`. Everything else is provided.
 
 ---
 ###  Provided Test
@@ -223,7 +223,7 @@ Each allocates a fresh `double` array of `sa->size` elements, copies the relevan
 
 ---
 
-# Part 5: The REPL (20 points)
+## Part 5: The REPL (20 points)
 
 **File:** `src/main.c`
 
@@ -239,9 +239,9 @@ Commands: load <filename>, plot high, plot low, plot avg, max, min, exit
 
 ---
 
-## Commands to Implement
+### Commands to Implement
 
-### `load <filename>` (6 points)
+#### `load <filename>` (6 points)
 
 Loads a stock data file into the `StockArray`. The filename follows the command after a space, so `load data/aapl.txt` should open `data/aapl.txt`.
 
@@ -264,7 +264,7 @@ Error: could not open data/aapl.txt
 
 **Hint:** The filename starts at `buffer + 5`, five characters past the beginning of the buffer, skipping past `"load "`. No extra parsing needed.
 
-### `plot high` (3 points)
+#### `plot high` (3 points)
 
 Extracts the daily high prices and passes them to `plot_series`.
 
@@ -279,17 +279,17 @@ Error: no file loaded, use load <filename>
 - Call `sa_extract_highs`, pass the result and `sa.size` to `plot_series` with the label `"Daily High"`, then free the extracted array.
 
 
-### `plot low` (3 points)
+#### `plot low` (3 points)
 
 Same as `plot high` but for daily lows. Label: `"Daily Low"`.
 
 
-### `plot avg` (3 points)
+#### `plot avg` (3 points)
 
 Same as `plot high` but for daily averages. Label: `"Daily Average"`.
 
 
-### `max` (2 points)
+#### `max` (2 points)
 
 Prints the highest price seen across all loaded days.
 
@@ -303,7 +303,7 @@ Overall high: 199.62
 ```
 
 
-### `min` (3 points)
+#### `min` (3 points)
 
 Prints the lowest price seen across all loaded days.
 
@@ -319,7 +319,7 @@ Overall low: 124.17
 
 ---
 
-## Expected Session
+### Expected Session
 
 A correct implementation should produce a session like the following. Use this as your own acceptance test before submitting:
 
@@ -411,7 +411,7 @@ Note that loading a second file after the first works cleanly, the old array is 
 Submit a single `.zip` file named `lastname_firstname_hw_stock.zip` containing:
 
 ```
-CS220-HW2-LastName/
+CS220-HW3-LastName/
 ├── bin/
 ├── include/
 │   └── stock_array.h
