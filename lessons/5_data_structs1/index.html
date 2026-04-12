@@ -1178,7 +1178,7 @@ linear and non-linear data structures and their implementations.</p>
 </span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>
 </span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="n">strcpy</span><span class="p">(</span><span class="n">str1</span><span class="p">,</span><span class="w"> </span><span class="n">str2</span><span class="p">);</span>
 </span></code></pre></div>
-<p>This is called <strong>shallow copying</strong> — copying the reference rather than the data it points to. This extents to <code>struct</code>'s meaning we need to copy array and string fields element by element using loops or <code>strcpy()</code> each time or through a function:</p>
+<p>This is called <strong>shallow copying</strong> - copying the reference rather than the data it points to. This extents to <code>struct</code>'s meaning we need to copy array and string fields element by element using loops or <code>strcpy()</code> each time or through a function:</p>
 <div class="language-C highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// Stock struct, stores ticker and last week of prices</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">ticker</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
@@ -1197,8 +1197,8 @@ linear and non-linear data structures and their implementations.</p>
 </span></code></pre></div>
 <p><strong>Note</strong>: Those arrows, <code>-&gt;</code>, are dereference access operators. This are effectively dereferencing and then accessing the field you need. <code>dest-&gt;ticker</code> is equivalent to <code>(*dest).ticker</code>. More on this in the lab on structs, arrays and strings.</p>
 <p>Records do not have other operations on them generally, other than maybe a print or output operation. This makes them a structure that is used by other data structures that allow for further collection of multiple records.  </p>
-<p>Records on their own are not particularly powerful — their value comes from being the atom that larger structures are built from. A linked list is a chain of records. A queue is a managed collection of records. A hash table is an array of records. Understanding what a record is and how C represents it in memory is the foundation for everything that follows.</p>
-<p>The next lesson introduces <strong>linear data structures</strong> — structures where elements have a defined sequential order. We will look at what makes a structure linear, contrast it with non-linear structures, and then dig into the most fundamental linear structure you will use: the array.</p>
+<p>Records on their own are not particularly powerful - their value comes from being the atom that larger structures are built from. A linked list is a chain of records. A queue is a managed collection of records. A hash table is an array of records. Understanding what a record is and how C represents it in memory is the foundation for everything that follows.</p>
+<p>The next lesson introduces <strong>linear data structures</strong> - structures where elements have a defined sequential order. We will look at what makes a structure linear, contrast it with non-linear structures, and then dig into the most fundamental linear structure you will use: the array.</p>
 
 
 

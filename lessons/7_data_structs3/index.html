@@ -1320,7 +1320,7 @@ off the top of each book first.</p>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">q</span><span class="o">-&gt;</span><span class="n">size</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 </span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>Note: The <code>size</code> field is what lets us distinguish between a full and empty queue — both states would otherwise look identical since <code>head == tail</code> in both cases. This is cleaner than the alternative of leaving one slot permanently empty.</p>
+<p>Note: The <code>size</code> field is what lets us distinguish between a full and empty queue, both states would otherwise look identical since <code>head == tail</code> in both cases. This is cleaner than the alternative of leaving one slot permanently empty.</p>
 <p>Like stacks, all operations run in O(1), making queues efficient for situations where you need strict ordering of processing. These are good for when you need to process things in the order they arrived, times like:</p>
 <ul>
 <li><strong>Task Scheduling</strong><ul>
@@ -1332,7 +1332,7 @@ off the top of each book first.</p>
 </ul>
 </li>
 <li><strong>Buffering</strong><ul>
-<li>Any time data is produced faster than it can be consumed — like keyboard input, network packets, or print jobs — a queue holds the incoming data in order until it can be processed.</li>
+<li>Any time data is produced faster than it can be consumed, like keyboard input, network packets, or print jobs, a queue holds the incoming data in order until it can be processed.</li>
 </ul>
 </li>
 </ul>
@@ -1343,7 +1343,7 @@ off the top of each book first.</p>
 </ul>
 </li>
 <li><strong>Deque (Double-Ended Queue)</strong> <ul>
-<li>Allows enqueue and dequeue from <em>both</em> ends, making it a generalization of both stacks and queues at once. Useful when you need flexibility in which end you process from.</li>
+<li>Allows enqueue and dequeue from both ends, making it a generalization of both stacks and queues at once. Useful when you need flexibility in which end you process from.</li>
 </ul>
 </li>
 </ul>
@@ -1618,13 +1618,13 @@ off the top of each book first.</p>
 <p>Where linked lists fall short is random access. Unlike arrays, there is no way to jump to index <code>i</code> directly; you must walk from HEAD every time, which is why search and index-based operations are all O(n). There is also a memory overhead cost since every node carries an extra pointer alongside its data.</p>
 <p>Linked lists are well suited for:</p>
 <ul>
-<li><strong>Implementing stacks and queues</strong> — prepend and pop-front are both O(1), making them efficient backing structures without a fixed size limit.</li>
-<li><strong>Maintaining an ordered collection with frequent insertions/deletions</strong> — once you have a pointer to the right node, inserting or removing is just a pointer rewire with no shifting involved.</li>
-<li><strong>Building more complex structures</strong> — linked lists are the foundation of adjacency lists in graphs, hash table chaining, and LRU caches.</li>
+<li><strong>Implementing stacks and queues</strong>: prepend and pop-front are both O(1), making them efficient backing structures without a fixed size limit.</li>
+<li><strong>Maintaining an ordered collection with frequent insertions/deletions</strong>: once you have a pointer to the right node, inserting or removing is just a pointer rewire with no shifting involved.</li>
+<li><strong>Building more complex structures</strong>: linked lists are the foundation of adjacency lists in graphs, hash table chaining, and LRU caches.</li>
 </ul>
 <hr />
 <h2 id="doubly-linked-lists">Doubly Linked Lists</h2>
-<p>A <strong>doubly linked list</strong> extends the singly linked list by giving each node a second pointer — <code>prev</code> — pointing back to the node before it, in addition to the existing <code>next</code> pointer. The list itself also typically holds a <code>TAIL</code> pointer alongside <code>HEAD</code>.</p>
+<p>A <strong>doubly linked list</strong> extends the singly linked list by giving each node a second pointer, <code>prev</code>, pointing back to the node before it, in addition to the existing <code>next</code> pointer. The list itself also typically holds a <code>TAIL</code> pointer alongside <code>HEAD</code>.</p>
 <div class="language-c highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">DListNode</span><span class="w"> </span><span class="n">DListNode</span><span class="p">;</span>
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">DListNode</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">content</span><span class="p">;</span>
@@ -1640,11 +1640,11 @@ off the top of each book first.</p>
 </span></code></pre></div>
 <p>The structural difference is small, but it unlocks meaningful capability improvements:</p>
 <ul>
-<li><strong>Backward traversal</strong> — you can walk the list in either direction, which makes operations like reverse iteration or finding a node from the tail straightforward.</li>
-<li><strong>O(1) append and tail removal</strong> — with a <code>TAIL</code> pointer and a <code>prev</code> link, you no longer need to traverse the entire list to reach the end. Appending and removing the last node both become constant time operations.</li>
-<li><strong>Easier node removal given a pointer</strong> — in a singly linked list, removing a node requires a reference to the <em>previous</em> node so you can rewire its <code>next</code>. With <code>prev</code> built in, any node can remove itself with no traversal needed.</li>
+<li><strong>Backward traversal</strong>: you can walk the list in either direction, which makes operations like reverse iteration or finding a node from the tail straightforward.</li>
+<li><strong>O(1) append and tail removal</strong>:  with a <code>TAIL</code> pointer and a <code>prev</code> link, you no longer need to traverse the entire list to reach the end. Appending and removing the last node both become constant time operations.</li>
+<li><strong>Easier node removal given a pointer</strong>: in a singly linked list, removing a node requires a reference to the <em>previous</em> node so you can rewire its <code>next</code>. With <code>prev</code> built in, any node can remove itself with no traversal needed.</li>
 </ul>
-<p>The tradeoff is that every insertion and removal now needs to maintain <em>two</em> pointers instead of one. The logic is the same as in a singly linked list — you are just doing the rewiring twice, for both <code>next</code> and <code>prev</code> — but it is easy to miss one side and corrupt the list. The memory cost per node also increases by one pointer.</p>
+<p>The tradeoff is that every insertion and removal now needs to maintain <em>two</em> pointers instead of one. The logic is the same as in a singly linked list, you are just doing the rewiring twice, for both <code>next</code> and <code>prev</code>, but it is easy to miss one side and corrupt the list. The memory cost per node also increases by one pointer.</p>
 <p>Here is a comparison of the two structures at a glance:</p>
 <table>
 <thead>
@@ -1672,8 +1672,8 @@ off the top of each book first.</p>
 </tr>
 <tr>
 <td>Remove given pointer</td>
-<td>O(n) — need previous</td>
-<td>O(1) — <code>prev</code> is built in</td>
+<td>O(n)  need previous</td>
+<td>O(1) <code>prev</code> is built in</td>
 </tr>
 <tr>
 <td>Traversal directions</td>
@@ -1692,7 +1692,7 @@ off the top of each book first.</p>
 <h2 id="summary">Summary</h2>
 <p>Stacks, queues, and linked lists are three foundational linear structures, each with a distinct contract for how you interact with it:</p>
 <ul>
-<li>A <strong>stack</strong> enforces LIFO ordering. You can only touch the top, which makes it ideal for tracking state in reverse — function calls, undo history, expression parsing.</li>
+<li>A <strong>stack</strong> enforces LIFO ordering. You can only touch the top, which makes it ideal for tracking state in reverse, ie function calls, undo history, expression parsing.</li>
 <li>A <strong>queue</strong> enforces FIFO ordering. Items are processed in the order they arrive, making it the right structure for scheduling, buffering, and level-order traversal.</li>
 <li>A <strong>linked list</strong> gives up random access in exchange for O(1) structural manipulation at the head and flexible resizing without any copying. A doubly linked list extends this to O(1) operations at both ends and adds the ability to traverse backward.</li>
 </ul>
