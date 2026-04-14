@@ -198,7 +198,7 @@ bool queue_is_empty(Queue* q)
 }
 ```
 
-Note: The `size` field is what lets us distinguish between a full and empty queue — both states would otherwise look identical since `head == tail` in both cases. This is cleaner than the alternative of leaving one slot permanently empty.
+Note: The `size` field is what lets us distinguish between a full and empty queue, both states would otherwise look identical since `head == tail` in both cases. This is cleaner than the alternative of leaving one slot permanently empty.
 
 Like stacks, all operations run in O(1), making queues efficient for situations where you need strict ordering of processing. These are good for when you need to process things in the order they arrived, times like:
 
@@ -207,14 +207,14 @@ Like stacks, all operations run in O(1), making queues efficient for situations 
 - **Breadth-First Search**
     - When traversing a graph or tree level by level, a queue tracks which nodes to visit next, ensuring you fully explore one level before moving to the next.
 - **Buffering**
-    - Any time data is produced faster than it can be consumed — like keyboard input, network packets, or print jobs — a queue holds the incoming data in order until it can be processed.
+    - Any time data is produced faster than it can be consumed, like keyboard input, network packets, or print jobs, a queue holds the incoming data in order until it can be processed.
 
 Queues have additional extensions beyond this simple implementation. Some of the well known ones are:
 
 - **Priority Queue**
 	- Instead of strict FIFO ordering, each element is given a priority and the highest priority element is always dequeued first regardless of insertion order. Commonly implemented with a heap rather than a plain array.
 - **Deque (Double-Ended Queue)** 
-	- Allows enqueue and dequeue from _both_ ends, making it a generalization of both stacks and queues at once. Useful when you need flexibility in which end you process from.
+	- Allows enqueue and dequeue from both ends, making it a generalization of both stacks and queues at once. Useful when you need flexibility in which end you process from.
 
 Both stacks and queues are fundamental data structures that are used at the core of a lot of software. They are related in operation and implementation with both being essentially arrays, just with specific algorithms for interaction. They both also enforce ordering on the elements queues in order of addition and stacks in reverse order.
 ## Linked Lists
@@ -478,15 +478,15 @@ Where linked lists fall short is random access. Unlike arrays, there is no way t
 
 Linked lists are well suited for:
 
-- **Implementing stacks and queues** — prepend and pop-front are both O(1), making them efficient backing structures without a fixed size limit.
-- **Maintaining an ordered collection with frequent insertions/deletions** — once you have a pointer to the right node, inserting or removing is just a pointer rewire with no shifting involved.
-- **Building more complex structures** — linked lists are the foundation of adjacency lists in graphs, hash table chaining, and LRU caches.
+- **Implementing stacks and queues**: prepend and pop-front are both O(1), making them efficient backing structures without a fixed size limit.
+- **Maintaining an ordered collection with frequent insertions/deletions**: once you have a pointer to the right node, inserting or removing is just a pointer rewire with no shifting involved.
+- **Building more complex structures**: linked lists are the foundation of adjacency lists in graphs, hash table chaining, and LRU caches.
 
 ---
 
 ## Doubly Linked Lists
 
-A **doubly linked list** extends the singly linked list by giving each node a second pointer — `prev` — pointing back to the node before it, in addition to the existing `next` pointer. The list itself also typically holds a `TAIL` pointer alongside `HEAD`.
+A **doubly linked list** extends the singly linked list by giving each node a second pointer, `prev`, pointing back to the node before it, in addition to the existing `next` pointer. The list itself also typically holds a `TAIL` pointer alongside `HEAD`.
 
 ```c
 typedef struct DListNode DListNode;
@@ -505,22 +505,22 @@ typedef struct {
 
 The structural difference is small, but it unlocks meaningful capability improvements:
 
-- **Backward traversal** — you can walk the list in either direction, which makes operations like reverse iteration or finding a node from the tail straightforward.
-- **O(1) append and tail removal** — with a `TAIL` pointer and a `prev` link, you no longer need to traverse the entire list to reach the end. Appending and removing the last node both become constant time operations.
-- **Easier node removal given a pointer** — in a singly linked list, removing a node requires a reference to the _previous_ node so you can rewire its `next`. With `prev` built in, any node can remove itself with no traversal needed.
+- **Backward traversal**: you can walk the list in either direction, which makes operations like reverse iteration or finding a node from the tail straightforward.
+- **O(1) append and tail removal**:  with a `TAIL` pointer and a `prev` link, you no longer need to traverse the entire list to reach the end. Appending and removing the last node both become constant time operations.
+- **Easier node removal given a pointer**: in a singly linked list, removing a node requires a reference to the _previous_ node so you can rewire its `next`. With `prev` built in, any node can remove itself with no traversal needed.
 
-The tradeoff is that every insertion and removal now needs to maintain _two_ pointers instead of one. The logic is the same as in a singly linked list — you are just doing the rewiring twice, for both `next` and `prev` — but it is easy to miss one side and corrupt the list. The memory cost per node also increases by one pointer.
+The tradeoff is that every insertion and removal now needs to maintain _two_ pointers instead of one. The logic is the same as in a singly linked list, you are just doing the rewiring twice, for both `next` and `prev`, but it is easy to miss one side and corrupt the list. The memory cost per node also increases by one pointer.
 
 Here is a comparison of the two structures at a glance:
 
-|                      | Singly Linked List   | Doubly Linked List        |
-| -------------------- | -------------------- | ------------------------- |
-| Node pointers        | `next` only          | `next` and `prev`         |
-| Append               | O(n)                 | O(1) with TAIL pointer    |
-| Remove tail          | O(n)                 | O(1) with TAIL pointer    |
-| Remove given pointer | O(n) — need previous | O(1) — `prev` is built in |
-| Traversal directions | Forward only         | Forward and backward      |
-| Memory per node      | 1 extra pointer      | 2 extra pointers          |
+|                      | Singly Linked List  | Doubly Linked List      |
+| -------------------- | ------------------- | ----------------------- |
+| Node pointers        | `next` only         | `next` and `prev`       |
+| Append               | O(n)                | O(1) with TAIL pointer  |
+| Remove tail          | O(n)                | O(1) with TAIL pointer  |
+| Remove given pointer | O(n)  need previous | O(1) `prev` is built in |
+| Traversal directions | Forward only        | Forward and backward    |
+| Memory per node      | 1 extra pointer     | 2 extra pointers        |
 
 Doubly linked lists are the structure behind browser history (back and forward), the undo/redo system in most editors, and the standard library's `std::list` in C++. Any time you need O(1) operations at _both_ ends of a list, or need to traverse in both directions, a doubly linked list is the right tool.
 
@@ -530,7 +530,7 @@ Doubly linked lists are the structure behind browser history (back and forward),
 
 Stacks, queues, and linked lists are three foundational linear structures, each with a distinct contract for how you interact with it:
 
-- A **stack** enforces LIFO ordering. You can only touch the top, which makes it ideal for tracking state in reverse — function calls, undo history, expression parsing.
+- A **stack** enforces LIFO ordering. You can only touch the top, which makes it ideal for tracking state in reverse, ie function calls, undo history, expression parsing.
 - A **queue** enforces FIFO ordering. Items are processed in the order they arrive, making it the right structure for scheduling, buffering, and level-order traversal.
 - A **linked list** gives up random access in exchange for O(1) structural manipulation at the head and flexible resizing without any copying. A doubly linked list extends this to O(1) operations at both ends and adds the ability to traverse backward.
 
