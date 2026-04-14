@@ -1,3 +1,5 @@
+# C++ Quick Start
+
 A component of this course is to learn the C++ programming language. C++ is an extension of C that adds new features to make the language feel modern and more powerful. This lesson will focus on the general trends of translating into C++ from C.
 
 In this lesson, we will cover C++'s:
@@ -452,7 +454,6 @@ The STL is a collection of ready-made data structures and algorithms that ship w
 They all live under `std::` and need their corresponding header, for example `#include <vector>` for vector. You will see these come up later in the course once we start talking about what they actually are internally.
 
 ---
-
 ## Quick Reference: C to C++ Cheat Sheet
 
 | |C|C++|
