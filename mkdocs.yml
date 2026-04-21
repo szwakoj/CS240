@@ -60,6 +60,7 @@ nav:
     - Basic DS: lessons/5_data_structs1.md
     - DS - Linear I: lessons/6_data_structs2.md
     - DS - Linear II: lessons/7_data_structs3.md
+    - C++ Quick Start: lessons/8_c++_quick_start.md
   - Labs:
     - Lab 1: labs/1_insertion_breakdown.md
     - Lab 2: labs/2_array_lab.md
